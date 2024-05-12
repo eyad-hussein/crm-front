@@ -13,7 +13,7 @@ export default function CustomerSection({
   customers,
 }: CustomerSectionProps) {
   return (
-    <section className='flex flex-col'>
+    <section className='flex flex-col w-full'>
       <CustomerSectionHeader title={title} />
       <CustomerSectionNav />
       <CustomersList customers={customers} />
