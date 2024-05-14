@@ -11,7 +11,6 @@ const createCustomer = async (formData: FormData) => {
 
   switch (data.state) {
     case CustomerStateType.RESERVE:
-      console.log("in");
       try {
         const response = await axios.post(
           "http://127.0.0.1:5000/customers/reserves",

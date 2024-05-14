@@ -1,6 +1,6 @@
 import { PhoneNumberType } from "@/enums/phone-number-type";
 
-interface IPhoneNumber {
+export default interface IPhoneNumber {
   id: number;
   phone_number: string | null;
   extension: string | null;

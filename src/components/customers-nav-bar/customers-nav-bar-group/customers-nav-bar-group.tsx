@@ -20,6 +20,12 @@ export default function CustomersNavBarGroup() {
       <CustomersNavBarItem
         href='/customers/dashboard'
         icon={userProfileIcon}
+        name='On Holds'
+      />
+
+      <CustomersNavBarItem
+        href='/customers/dashboard'
+        icon={userProfileIcon}
         name='Reserves'
       />
       <CustomersNavBarItem
@@ -31,11 +37,6 @@ export default function CustomersNavBarGroup() {
         href='/customers/dashboard'
         icon={userProfileIcon}
         name='Clients'
-      />
-      <CustomersNavBarItem
-        href='/customers/dashboard'
-        icon={userProfileIcon}
-        name='Proposals'
       />
       <CustomersNavBarItem
         href='/customers/dashboard'

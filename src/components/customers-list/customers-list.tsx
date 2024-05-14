@@ -1,11 +1,17 @@
-import ICustomer from "@/types/customer";
+"use client";
+import { useRouter } from "next/navigation";
 import ICustomerState from "@/types/customer-state";
-
+import EditButton from "../buttons/edit-button/edit-button";
 interface CustomersListProps {
   customers: ICustomerState[] | null;
 }
 
 export default function CustomersList({ customers }: CustomersListProps) {
+  const router = useRouter();
+
+  const handleOnClick = (customerId: number, customerState: string): void => {
+    router.push(`/customers/${customerId}/${customerState}`);
+  };
   return (
     <div className='overflow-x-scroll pb-10'>
       <table
@@ -33,28 +39,84 @@ export default function CustomersList({ customers }: CustomersListProps) {
           {customers &&
             customers.map((customer: ICustomerState) => {
               const { customer: customerData } = customer;
-
               return (
                 <tr key={customer.id}>
-                  <td>{`${customerData.first_name} ${customerData.last_name}`}</td>
-                  <td>Stage</td>
-                  <td>{customerData.follow_up_date?.toString()}</td>
-                  <td>{customerData.account.industry}</td>
-                  <td>{customerData.account.account_name}</td>
-                  <td>{customerData.country?.country_name}</td>
-                  <td>{customerData.lead_source}</td>
-                  <td>{customerData.title}</td>
                   <td>
-                    {customerData.customer_phone_numbers.length &&
-                      customerData.customer_phone_numbers[0]}
+                    {`${customerData.first_name} ${customerData.last_name}`}{" "}
+                    <EditButton customerId={customerData.id} />
                   </td>
-                  <td>{customerData.email}</td>
-                  <td>
+                  <td
+                    onClick={() =>
+                      handleOnClick(customerData.id, customerData.state)
+                    }>
+                    Stage
+                  </td>
+                  <td
+                    onClick={() =>
+                      handleOnClick(customerData.id, customerData.state)
+                    }>
+                    {customerData.follow_up_date?.toString()}
+                  </td>
+                  <td
+                    onClick={() =>
+                      handleOnClick(customerData.id, customerData.state)
+                    }>
+                    {customerData.account.industry}
+                  </td>
+                  <td
+                    onClick={() =>
+                      handleOnClick(customerData.id, customerData.state)
+                    }>
+                    {customerData.account.account_name}
+                  </td>
+                  <td
+                    onClick={() =>
+                      handleOnClick(customerData.id, customerData.state)
+                    }>
+                    {customerData.country?.country_name}
+                  </td>
+                  <td
+                    onClick={() =>
+                      handleOnClick(customerData.id, customerData.state)
+                    }>
+                    {customerData.lead_source}
+                  </td>
+                  <td
+                    onClick={() =>
+                      handleOnClick(customerData.id, customerData.state)
+                    }>
+                    {customerData.title}
+                  </td>
+                  <td
+                    onClick={() =>
+                      handleOnClick(customerData.id, customerData.state)
+                    }>
+                    {customerData.customer_phone_numbers?.length &&
+                      customerData.customer_phone_numbers[0].phone_number}
+                  </td>
+                  <td
+                    onClick={() =>
+                      handleOnClick(customerData.id, customerData.state)
+                    }>
+                    {customerData.email}
+                  </td>
+                  <td
+                    onClick={() =>
+                      handleOnClick(customerData.id, customerData.state)
+                    }>
                     {customerData.services.length &&
                       customerData.services[0].service_name}
                   </td>
-                  <td>{`${customerData.user.first_name} ${customerData.user.last_name}`}</td>
-                  <td>{customerData.description}</td>
+                  <td
+                    onClick={() =>
+                      handleOnClick(customerData.id, customerData.state)
+                    }>{`${customerData.user.first_name} ${customerData.user.last_name}`}</td>
+                  <td
+                    onClick={() =>
+                      handleOnClick(customerData.id, customerData.state)
+                    }>
+                    {customerData.description}
+                  </td>
                 </tr>
               );
             })}

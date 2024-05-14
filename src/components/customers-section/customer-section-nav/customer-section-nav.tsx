@@ -11,7 +11,7 @@ export default function CustomerSectionNav() {
     <nav className='flex flex-col min-h-36 w-full mt-10 mb-5'>
       <div>Main table</div>
       <div className='flex w-full mt-auto mb-8'>
-        <FlatButton text='New Customer' />
+        <FlatButton href='/customers/create' text='New Customer' />
         <TransparentButton icon={searchIcon} text='Search' />
         <TransparentButton icon={userProfileIcon} text='Profile' />
         <TransparentButton icon={filterIcon} text='Filter' />
