@@ -5,19 +5,19 @@ export default function CustomerUserPortal() {
     <section className='flex flex-col w-[80%] pr-10'>
       <nav className='flex justify-between items-center'>
         <Link className='flex-1' href={"/"}>
-          Prospect
+          Activity Timeline
         </Link>
         <Link className='flex-1' href={"/"}>
-          Contact
+          Notes
         </Link>
         <Link className='flex-1' href={"/"}>
-          Follow Up
+          Tasks
         </Link>
         <Link className='flex-1' href={"/"}>
-          Proposed
+          Meetings
         </Link>
         <Link className='flex-1' href={"/"}>
-          Close
+          Deaks
         </Link>
       </nav>
     </section>

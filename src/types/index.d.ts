@@ -5,7 +5,7 @@ import IUser from "./user";
 import ICustomerState from "./customer-state";
 import IPhoneNumber from "./phone-number";
 import IService from "./service";
-import IReserve from "./reserve";
+import IClosure from "./closure";
 import IProspect from "./prospect";
 
 export {
@@ -16,6 +16,6 @@ export {
   ICustomerState,
   IPhoneNumber,
   IService,
-  IReserve,
+  IClosure,
   IProspect,
 };

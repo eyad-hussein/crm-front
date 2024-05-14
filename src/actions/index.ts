@@ -5,6 +5,7 @@ import getAccounts from "./getAccounts";
 import createCustomer from "./createCustomer";
 import putCustomer from "./putCustomer";
 import getCustomer from "./getCustomer";
+import patchCustomerState from "./patchCustomerState";
 
 export {
   addCustomer,
@@ -14,4 +15,5 @@ export {
   createCustomer,
   putCustomer,
   getCustomer,
+  patchCustomerState,
 };

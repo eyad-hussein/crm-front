@@ -10,9 +10,12 @@ interface CustomerDetailsProps {
 
 export default function CustomerDetails({ customer }: CustomerDetailsProps) {
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-full mt-5'>
       <h2>Customer Details</h2>
-      <CustomerState customerState={customer?.state} />
+      <CustomerState
+        customerId={customer?.id}
+        oldCustomerState={customer?.state}
+      />
       <HorizontalDivider />
       <div className='flex justify-between mt-8'>
         <CustomerUserPortal />

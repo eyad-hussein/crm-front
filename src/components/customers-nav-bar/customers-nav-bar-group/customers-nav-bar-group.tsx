@@ -14,34 +14,29 @@ export default function CustomersNavBarGroup() {
       <CustomersNavBarItem
         href='/customers/dashboard'
         icon={userProfileIcon}
+        name='Prospects'
+      />
+
+      <CustomersNavBarItem
+        href='/customers/dashboard'
+        icon={userProfileIcon}
+        name='Contacts'
+      />
+
+      <CustomersNavBarItem
+        href='/customers/dashboard'
+        icon={userProfileIcon}
         name='Follow Ups'
-      />
-
-      <CustomersNavBarItem
-        href='/customers/dashboard'
-        icon={userProfileIcon}
-        name='On Holds'
-      />
-
-      <CustomersNavBarItem
-        href='/customers/dashboard'
-        icon={userProfileIcon}
-        name='Reserves'
-      />
-      <CustomersNavBarItem
-        href='/customers/dashboard'
-        icon={userProfileIcon}
-        name='Prospect'
-      />
-      <CustomersNavBarItem
-        href='/customers/dashboard'
-        icon={userProfileIcon}
-        name='Clients'
       />
       <CustomersNavBarItem
         href='/customers/dashboard'
         icon={userProfileIcon}
         name='Proposals'
+      />
+      <CustomersNavBarItem
+        href='/customers/dashboard'
+        icon={userProfileIcon}
+        name='Closures'
       />
     </div>
   );
