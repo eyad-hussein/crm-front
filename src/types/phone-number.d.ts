@@ -5,7 +5,6 @@ export default interface IPhoneNumber {
   phone_number: string | null;
   extension: string | null;
   type_of_number: PhoneNumberType | null;
-  customer_id: number;
   created_at: Date;
   updated_at: Date;
 }

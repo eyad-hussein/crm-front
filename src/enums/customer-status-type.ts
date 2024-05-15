@@ -1,4 +1,4 @@
-export enum CustomerStateType {
+export enum CustomerStatusType {
   PROSPECT = "prospect",
   CONTACT = "contact",
   FOLLOW_UP = "follow_up",

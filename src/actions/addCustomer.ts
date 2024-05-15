@@ -1,8 +1,8 @@
 "use server";
-import { CustomerStateType } from "@/enums/customer-state-type";
+import { CustomerStatusType } from "@/enums";
 import axios from "axios";
 
-const addCustomer = async (newCustomer: CustomerStateType) => {
+const addCustomer = async (newCustomer: CustomerStatusType) => {
   try {
     const response = await axios.post("/customers", newCustomer);
     return response.data;

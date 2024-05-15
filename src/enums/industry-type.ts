@@ -1,4 +1,4 @@
 export enum IndustryType {
-  TECH = "TECH",
-  PHARMA = "PHARMA",
+  TECH = "tech",
+  PHARMA = "pharma",
 }

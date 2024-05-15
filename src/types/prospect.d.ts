@@ -1,3 +1,3 @@
-import ICustomerState from "./customer-state";
+import ICustomerStatus from "./customer-status";
 
-export default interface IProspect extends ICustomerState {}
+export default interface IProspect extends ICustomerStatus {}

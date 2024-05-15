@@ -3,12 +3,14 @@ interface FormInputProps {
   type: string;
   placeholder: string;
   className?: string;
+  value?: string | number;
 }
 
 export default function FormInput({
   name,
   type,
   placeholder,
+  value = "",
   className = "",
 }: FormInputProps): JSX.Element {
   return (
@@ -18,6 +20,7 @@ export default function FormInput({
       id={name}
       type={type}
       placeholder={placeholder}
+      defaultValue={value}
     />
   );
 }

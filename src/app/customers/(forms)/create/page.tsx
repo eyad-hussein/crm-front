@@ -1,4 +1,4 @@
-import { CustomerStateType } from "@/enums/customer-state-type";
+import { CustomerStatusType, IndustryType, SalutationType } from "@/enums";
 import { LeadSourceType } from "@/enums/lead-source-type";
 import {
   getUsers,
@@ -13,7 +13,7 @@ import FormLabel from "@/components/form-elements/form-label/form-label";
 import FormSelect from "@/components/form-elements/form-select/form-select";
 import FormInput from "@/components/form-elements/form-input/form-input";
 
-export default async function Page() {
+export default async function CreateCustomerFormPage() {
   const [users, countries, accounts, cities, states] = await Promise.all([
     getUsers(),
     getCountries(),
@@ -34,11 +34,13 @@ export default async function Page() {
               content='Salutation'
             />
             <FormSelect name='salutations'>
-              <option>---None---</option>
-              <option>Mr</option>
-              <option>Mrs</option>
-              <option>Ms</option>
-              <option>Other</option>
+              {Object.values(SalutationType).map((salutation) => {
+                return (
+                  <option key={salutation} value={salutation}>
+                    {salutation}
+                  </option>
+                );
+              })}
             </FormSelect>
           </div>
 
@@ -62,15 +64,13 @@ export default async function Page() {
           </div>
 
           <div className='w-full mb-6'>
-            <FormLabel className='mb-2' htmlFor='accont_id' content='Company' />
+            <FormLabel
+              className='mb-2'
+              htmlFor='account_name'
+              content='Company'
+            />
 
-            <FormSelect name='account_id'>
-              {accounts?.map((account) => (
-                <option key={account.id} value={account.id}>
-                  {account.account_name}
-                </option>
-              ))}
-            </FormSelect>
+            <FormInput name='account_name' type='text' placeholder='Company' />
           </div>
 
           <div className='flex flex-wrap -mx-3 mb-6'>
@@ -171,7 +171,7 @@ export default async function Page() {
             </div>
             <div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
               <FormLabel className='mb-2' htmlFor='state_id' content='State' />
-              <FormSelect name='city_id'>
+              <FormSelect name='state_id'>
                 {states?.map((state) => (
                   <option key={state.id} value={state.id}>
                     {state.state_name}
@@ -180,16 +180,8 @@ export default async function Page() {
               </FormSelect>
             </div>
             <div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
-              <FormLabel
-                className='mb-2'
-                htmlFor='postal_code_id'
-                content='Zip'
-              />
-              <FormInput
-                name='postal_code_id'
-                type='text'
-                placeholder='90210'
-              />
+              <FormLabel className='mb-2' htmlFor='postal_code' content='Zip' />
+              <FormInput name='postal_code' type='text' placeholder='90210' />
             </div>
           </div>
 
@@ -197,11 +189,11 @@ export default async function Page() {
             <div className='w-full px-3 mb-6 md:mb-0'>
               <FormLabel
                 className='mb-2'
-                htmlFor='employee_number'
+                htmlFor='number_of_employees'
                 content='No. Employees'
               />
               <FormInput
-                name='employee_number'
+                name='number_of_employees'
                 type='number'
                 placeholder='50'
               />
@@ -226,21 +218,25 @@ export default async function Page() {
           </div>
 
           <div className='w-full mb-6'>
-            <FormLabel className='mb-2' htmlFor='state' content='Lead Status' />
-            <FormSelect name='state'>
-              {Object.values(CustomerStateType).map((state) => {
-                if (state === CustomerStateType.FOLLOW_UP)
+            <FormLabel
+              className='mb-2'
+              htmlFor='status'
+              content='Lead Status'
+            />
+            <FormSelect name='status'>
+              {Object.values(CustomerStatusType).map((status) => {
+                if (status === CustomerStatusType.FOLLOW_UP)
                   return (
                     <option
-                      key={CustomerStateType.FOLLOW_UP}
-                      value={CustomerStateType.FOLLOW_UP}>
+                      key={CustomerStatusType.FOLLOW_UP}
+                      value={CustomerStatusType.FOLLOW_UP}>
                       Follow Up
                     </option>
                   );
                 else {
                   return (
-                    <option key={state} value={state}>
-                      {state[0].toUpperCase() + state.slice(1)}
+                    <option key={status} value={status}>
+                      {status[0].toUpperCase() + status.slice(1)}
                     </option>
                   );
                 }
@@ -248,7 +244,7 @@ export default async function Page() {
             </FormSelect>
           </div>
 
-          <div className='w-full mb-6'>
+          <div className='w-full mb-3'>
             <FormLabel className='mb-2' htmlFor='user_id' content='Assignee' />
             <FormSelect name='user_id'>
               {users?.map((user) => (
@@ -265,6 +261,20 @@ export default async function Page() {
               ))}
             </FormSelect>
           </div>
+
+          <div className='w-full mb-6'>
+            <FormLabel className='mb-2' htmlFor='industry' content='Industry' />
+            <FormSelect name='industry'>
+              {Object.values(IndustryType).map((industry) => {
+                return (
+                  <option key={industry} value={industry}>
+                    {industry[0].toUpperCase() + industry.slice(1)}
+                  </option>
+                );
+              })}
+            </FormSelect>{" "}
+          </div>
+
           <div className='w-full flex justify-between'>
             <div className='ml-auto mr-5'>
               <CancelButtonBig />

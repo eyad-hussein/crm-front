@@ -42,8 +42,7 @@ export default function CustomerProfileHeader({
                 src={telephoneIcon.src}
                 alt='phone'
               />
-              {customer.customer_phone_numbers?.length &&
-                customer.customer_phone_numbers[0].phone_number}
+              {customer.customer_phone_number?.phone_number}
             </span>
           </div>
         </div>
@@ -67,6 +66,7 @@ export default function CustomerProfileHeader({
           <span>Industry</span>
           <span className='block'>{customer.account.industry}</span>
         </div>
+
         <div className='pl-5'>
           <span>Created On</span>
           <span className='block'>{customer.createdAt.toString()}</span>

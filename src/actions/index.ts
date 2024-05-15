@@ -5,7 +5,7 @@ import getAccounts from "./getAccounts";
 import createCustomer from "./createCustomer";
 import putCustomer from "./putCustomer";
 import getCustomer from "./getCustomer";
-import patchCustomerState from "./patchCustomerState";
+import patchCustomerStatus from "./patchCustomerStatus";
 import getCities from "./getCities";
 import getStates from "./getStates";
 
@@ -17,7 +17,7 @@ export {
   createCustomer,
   putCustomer,
   getCustomer,
-  patchCustomerState,
+  patchCustomerStatus,
   getCities,
   getStates,
 };

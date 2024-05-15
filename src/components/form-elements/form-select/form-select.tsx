@@ -1,5 +1,3 @@
-import { CustomerStateType } from "@/enums";
-
 interface FormSelectProps {
   name: string;
   children: React.ReactNode;

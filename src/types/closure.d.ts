@@ -1,3 +1,3 @@
-import ICustomerState from "./customer-state";
+import ICustomerStatus from "./customer-status";
 
-export default interface IClosure extends ICustomerState {}
+export default interface IClosure extends ICustomerStatus {}
