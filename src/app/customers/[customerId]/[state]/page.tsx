@@ -1,7 +1,7 @@
 import CustomerDetails from "@/components/customer-details/customer-details";
 import CustomerProfileHeader from "@/components/customer-profile-header/customer-profile-header";
 import { getCustomer } from "@/actions";
-import CancelButton from "@/components/buttons/cancel-button/cancel-button";
+import CancelButtonSmall from "@/components/buttons/cancel-button/cancel-button-small";
 import HorizontalDivider from "@/components/horizontal-divider/horizontal-divider";
 interface CustomerProfileProps {
   params: {
@@ -18,7 +18,7 @@ export default async function CustomerProfilePage({
     return (
       <section className='flex flex-col relative'>
         <div className='absolute top-0 right-0'>
-          <CancelButton />
+          <CancelButtonSmall />
         </div>
         <CustomerProfileHeader customer={customer} />
         <HorizontalDivider />

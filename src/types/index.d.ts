@@ -7,6 +7,8 @@ import IPhoneNumber from "./phone-number";
 import IService from "./service";
 import IClosure from "./closure";
 import IProspect from "./prospect";
+import ICity from "./city";
+import IState from "./state";
 
 export {
   IAccount,
