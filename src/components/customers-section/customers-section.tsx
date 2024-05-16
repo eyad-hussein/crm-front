@@ -7,18 +7,24 @@ interface CustomerSectionProps {
   title: string;
   customers: ICustomerStatus[] | null;
   status: string;
+  query?: string;
 }
 
 export default function CustomerSection({
   status,
   title,
   customers,
+  query,
 }: CustomerSectionProps) {
   return (
     <section className='flex flex-col w-full'>
       <CustomerSectionHeader title={title} />
       <CustomerSectionNav />
-      <CustomersList status={status} initialCustomers={customers} />
+      <CustomersList
+        initialCustomers={customers}
+        status={status}
+        query={query}
+      />
     </section>
   );
 }

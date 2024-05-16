@@ -1,17 +1,28 @@
-import axios from "axios";
-
 import CustomerSection from "@/components/customers-section/customers-section";
-import { IProspect } from "@/types";
+import { getCustomersBasedOnStatus, searchForCustomer } from "@/actions";
+import { Suspense } from "react";
 
-export default async function ProspectsPage() {
-  const response = await axios.get<IProspect[]>(
-    `${process.env.BACKEND_API_URL}/customers/prospects`
-  );
+export default async function ProspectsPage({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+  };
+}) {
+  console.log("query, in page", searchParams?.query);
+
+  const response = await (searchParams?.query
+    ? searchForCustomer("prospects", searchParams.query)
+    : getCustomersBasedOnStatus("prospects"));
+
   return (
-    <CustomerSection
-      status='prospects'
-      customers={response.data}
-      title='Prospects'
-    />
+    <Suspense fallback={<div>Still loading</div>}>
+      <CustomerSection
+        status='prospects'
+        customers={response}
+        query={searchParams?.query}
+        title='Prospects'
+      />
+    </Suspense>
   );
 }

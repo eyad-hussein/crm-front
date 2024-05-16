@@ -1,7 +1,4 @@
-import axios from "axios";
-
 import CustomerSection from "@/components/customers-section/customers-section";
-import { IContact } from "@/types";
 import { getCustomersBasedOnStatus, searchForCustomer } from "@/actions";
 import { Suspense } from "react";
 
@@ -10,25 +7,20 @@ export default async function ContactsPage({
 }: {
   searchParams?: {
     query?: string;
-    page?: string;
   };
 }) {
   console.log("query, in page", searchParams?.query);
 
-  let response;
-  if (searchParams?.query) {
-    response = await searchForCustomer(searchParams, "contact");
-  } else {
-    response = await getCustomersBasedOnStatus("contacts");
-  }
-
-  // response = await getCustomersBasedOnStatus("contacts");
+  const response = await (searchParams?.query
+    ? searchForCustomer("contacts", searchParams.query)
+    : getCustomersBasedOnStatus("contacts"));
 
   return (
     <Suspense fallback={<div>Still loading</div>}>
       <CustomerSection
         status='contacts'
         customers={response}
+        query={searchParams?.query}
         title='Contacts'
       />
     </Suspense>

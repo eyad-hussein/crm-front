@@ -1,17 +1,24 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
+import { useCallback } from "react";
 import { ICustomerStatus } from "@/types";
 import EditButton from "../buttons/edit-button/edit-button";
-import { deleteCustomer, getCustomersBasedOnStatus } from "@/actions";
+import {
+  deleteCustomer,
+  getCustomersBasedOnStatus,
+  searchForCustomer,
+} from "@/actions";
 interface CustomersListProps {
   initialCustomers: ICustomerStatus[] | null;
   status: string;
+  query?: string;
 }
 
 export default function CustomersList({
   initialCustomers,
   status,
+  query,
 }: CustomersListProps) {
   const router = useRouter();
 
@@ -21,17 +28,17 @@ export default function CustomersList({
   );
   const [isDelete, setIsDelete] = useState<boolean>(false);
 
-  useEffect(() => {
-    const fetchCustomers = async () => {
+  const fetchCustomers = useCallback(async () => {
+    if (query) {
+      setCustomers(await searchForCustomer(status, query));
+    } else {
       setCustomers(await getCustomersBasedOnStatus(status));
-    };
-
-    fetchCustomers();
-  }, [isDelete]);
+    }
+  }, [status, query]);
 
   useEffect(() => {
-    setCustomers(initialCustomers);
-  }, [initialCustomers]);
+    fetchCustomers();
+  }, [fetchCustomers, isDelete]);
 
   const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const id = parseInt(e.target.getAttribute("data-customer-id") || "");
