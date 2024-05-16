@@ -23,7 +23,7 @@ export default async function CreateCustomerFormPage() {
   ]);
 
   return (
-    <div className='py-5 px-44 w-full'>
+    <div>
       <h1 className='mb-6 text-3xl'>Add a new Customer</h1>
       <form className='w-full flex justify-between' action={createCustomer}>
         <div className='w-1/2 mr-12'>

@@ -13,7 +13,6 @@ export default async function CustomerProfilePage({
   params,
 }: CustomerProfileProps) {
   try {
-    console.log(params);
     const customer = await getCustomer(params.customerId);
     return (
       <section className='flex flex-col relative'>

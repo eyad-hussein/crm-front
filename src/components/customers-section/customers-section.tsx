@@ -6,9 +6,11 @@ import CustomerSectionNav from "./customer-section-nav/customer-section-nav";
 interface CustomerSectionProps {
   title: string;
   customers: ICustomerStatus[] | null;
+  status: string;
 }
 
 export default function CustomerSection({
+  status,
   title,
   customers,
 }: CustomerSectionProps) {
@@ -16,7 +18,7 @@ export default function CustomerSection({
     <section className='flex flex-col w-full'>
       <CustomerSectionHeader title={title} />
       <CustomerSectionNav />
-      <CustomersList customers={customers} />
+      <CustomersList status={status} initialCustomers={customers} />
     </section>
   );
 }

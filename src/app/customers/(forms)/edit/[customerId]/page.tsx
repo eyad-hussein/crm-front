@@ -35,7 +35,7 @@ export default async function EditFormPage({ params }: EditFormPageProps) {
   ]);
 
   return (
-    <div className='py-5 px-44 w-full'>
+    <div>
       <h1 className='mb-6 text-3xl'>Add a new Customer</h1>
       <form
         className='w-full flex justify-between'
@@ -313,7 +313,7 @@ export default async function EditFormPage({ params }: EditFormPageProps) {
             </FormSelect>
           </div>
 
-          <div className='w-full mb-6'>
+          <div className='w-full mb-3'>
             <FormLabel className='mb-2' htmlFor='user_id' content='Assignee' />
             <FormSelect name='user_id'>
               {users?.map((user) => (

@@ -4,7 +4,13 @@ import axios from "axios";
 
 const createCustomer = async (formData: FormData) => {
   try {
-    console.log("creating customer, server action");
+    if (
+      !Object.values(CustomerStatusType).includes(
+        formData.get("status") as CustomerStatusType
+      )
+    )
+      throw Error("Invalid status");
+
     const data: { [key: string]: any } = {};
 
     formData.forEach((value, key) => {
@@ -28,19 +34,11 @@ const createCustomer = async (formData: FormData) => {
 
     console.log(data);
 
-    switch (data.status) {
-      case CustomerStatusType.PROSPECT:
-        try {
-          const response = await axios.post(
-            "http://127.0.0.1:5000/customers/prospects",
-            data
-          );
-          return response.data;
-        } catch (error) {
-          console.error(error);
-        }
-        break;
-    }
+    const response = await axios.post(
+      `${process.env.BACKEND_API_URL}/customers`,
+      data
+    );
+    return response.data;
   } catch (error) {
     console.error(error);
   }

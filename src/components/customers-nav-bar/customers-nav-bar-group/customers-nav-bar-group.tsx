@@ -2,7 +2,13 @@ import CustomersNavBarItem from "../customers-nav-bar-item/customers-nav-bar-ite
 import dashboardIcon from "../../../../public/assets/images/icons/dashboard.png";
 import userProfileIcon from "../../../../public/assets/images/icons/profile-user.png";
 
-export default function CustomersNavBarGroup() {
+interface CustomersNavBarGroupProps {
+  status: string;
+}
+
+export default function CustomersNavBarGroup({
+  status,
+}: CustomersNavBarGroupProps) {
   return (
     <div className='flex flex-col'>
       <CustomersNavBarItem

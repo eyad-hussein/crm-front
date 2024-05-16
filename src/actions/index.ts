@@ -8,6 +8,10 @@ import getCustomer from "./getCustomer";
 import patchCustomerStatus from "./patchCustomerStatus";
 import getCities from "./getCities";
 import getStates from "./getStates";
+import deleteCustomer from "./deleteCustomer";
+import getCustomersBasedOnStatus from "./getCustomersBasedOnStatus";
+import getProspects from "./getProspects";
+import searchForCustomer from "./searchForCustomer";
 
 export {
   addCustomer,
@@ -20,4 +24,8 @@ export {
   patchCustomerStatus,
   getCities,
   getStates,
+  deleteCustomer,
+  getCustomersBasedOnStatus,
+  getProspects,
+  searchForCustomer,
 };

@@ -10,6 +10,7 @@ import IProspect from "./prospect";
 import ICity from "./city";
 import IState from "./state";
 import IPostalCode from "./postal-code";
+import IContact from "./contact";
 
 export {
   IAccount,
@@ -22,4 +23,5 @@ export {
   IClosure,
   IProspect,
   IPostalCode,
+  IContact,
 };
