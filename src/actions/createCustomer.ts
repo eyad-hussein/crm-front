@@ -32,8 +32,6 @@ const createCustomer = async (formData: FormData) => {
       number_of_employees: data["number_of_employees"],
     };
 
-    console.log(data);
-
     const response = await axios.post(
       `${process.env.BACKEND_API_URL}/customers`,
       data

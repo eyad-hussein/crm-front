@@ -30,8 +30,6 @@ const putCustomer = async (customer: ICustomer, formData: FormData) => {
 
   const customerId = customer.id;
 
-  console.log(data);
-
   try {
     const response = await axios.patch(
       `http://localhost:5000/customers/${customerId}`,

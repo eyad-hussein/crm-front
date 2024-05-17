@@ -1,11 +1,14 @@
+"use client";
 import { ICustomerStatus } from "@/types";
 import CustomersList from "../customers-list/customers-list";
 import CustomerSectionHeader from "./customer-section-header/customer-section-header";
 import CustomerSectionNav from "./customer-section-nav/customer-section-nav";
+import { useState } from "react";
+import { filterCustomers } from "@/actions";
 
 interface CustomerSectionProps {
   title: string;
-  customers: ICustomerStatus[] | null;
+  initialCustomers: ICustomerStatus[] | null;
   status: string;
   query?: string;
 }
@@ -13,13 +16,27 @@ interface CustomerSectionProps {
 export default function CustomerSection({
   status,
   title,
-  customers,
+  initialCustomers,
   query,
 }: CustomerSectionProps) {
+  const [customers, setCustomers] = useState<ICustomerStatus[] | null>(
+    initialCustomers
+  );
+
+  const handleFilter = async (formData: FormData) => {
+    console.log("filtering customers, client side", formData);
+    const customers = await filterCustomers(status, formData);
+
+    console.log(customers);
+
+    if (customers) {
+      setCustomers(customers);
+    }
+  };
   return (
     <section className='flex flex-col w-full'>
       <CustomerSectionHeader title={title} />
-      <CustomerSectionNav />
+      <CustomerSectionNav handleFilter={handleFilter} />
       <CustomersList
         initialCustomers={customers}
         status={status}

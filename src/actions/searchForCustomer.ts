@@ -9,7 +9,6 @@ const searchForCustomer = async (status: string, query?: string) => {
       `${process.env.BACKEND_API_URL}/customers/search?query=${query}&status=${status}`
     );
 
-    console.log("response", response.data);
     return response.data;
   } catch (error) {
     console.log("error", error);

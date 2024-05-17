@@ -19,7 +19,7 @@ export default async function ProspectsPage({
     <Suspense fallback={<div>Still loading</div>}>
       <CustomerSection
         status='prospects'
-        customers={response}
+        initialCustomers={response}
         query={searchParams?.query}
         title='Prospects'
       />
