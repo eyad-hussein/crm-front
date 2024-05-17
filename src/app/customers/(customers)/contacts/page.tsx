@@ -19,7 +19,7 @@ export default async function ContactsPage({
     <Suspense fallback={<div>Still loading</div>}>
       <CustomerSection
         status='contacts'
-        customers={response}
+        initialCustomers={response}
         query={searchParams?.query}
         title='Contacts'
       />

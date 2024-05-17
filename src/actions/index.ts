@@ -12,6 +12,7 @@ import deleteCustomer from "./deleteCustomer";
 import getCustomersBasedOnStatus from "./getCustomersBasedOnStatus";
 import getProspects from "./getProspects";
 import searchForCustomer from "./searchForCustomer";
+import filterCustomers from "./filterCustomers";
 
 export {
   addCustomer,
@@ -28,4 +29,5 @@ export {
   getCustomersBasedOnStatus,
   getProspects,
   searchForCustomer,
+  filterCustomers,
 };

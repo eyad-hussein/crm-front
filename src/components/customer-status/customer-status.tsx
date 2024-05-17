@@ -17,10 +17,9 @@ export default function CustomerStatus({
   >(oldCustomerStatus);
 
   const handleOnClick = async (status: CustomerStatusType) => {
+    console.log("patching customer status, client side");
     setCurrentCustomerStatus(status);
-    console.log("heere");
     await patchCustomerStatus(customerId!, status);
-    console.log("there");
   };
 
   return (
@@ -32,7 +31,6 @@ export default function CustomerStatus({
 
         if (status === currentCustomerStatus) {
           classes = classes.replace("bg-primary-light", "bg-primary");
-          console.log(classes);
         }
         return (
           <button

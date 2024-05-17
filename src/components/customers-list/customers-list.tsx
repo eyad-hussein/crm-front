@@ -20,6 +20,7 @@ export default function CustomersList({
   status,
   query,
 }: CustomersListProps) {
+  console.log("renderew", initialCustomers);
   const router = useRouter();
 
   const [selected, setSelected] = useState<number[]>([]);
@@ -27,6 +28,10 @@ export default function CustomersList({
     initialCustomers
   );
   const [isDelete, setIsDelete] = useState<boolean>(false);
+
+  useEffect(() => {
+    setCustomers(initialCustomers);
+  }, [initialCustomers]);
 
   const fetchCustomers = useCallback(async () => {
     if (query) {

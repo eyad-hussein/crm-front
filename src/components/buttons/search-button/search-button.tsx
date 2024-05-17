@@ -25,7 +25,6 @@ export default function SearchButton({ src }: SearchButtonProps) {
       params.delete("query");
     }
     replace(`${pathname}?${params.toString()}`);
-    // console.log(value);
   };
   return (
     <button className='flex justify-between items-center text-black font-bold py-2 px-4 rounded text-sm'>
