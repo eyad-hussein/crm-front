@@ -1,25 +1,45 @@
-import Link from "next/link";
+"use client";
+import { useState } from "react";
+import CustomerUserPortalNavBar from "./customer-user-portal-nav-bar/customer-user-portal-nav-bar";
+import { ActivityType, CustomerUserPortalTabType } from "@/enums";
+import NotesTab from "./notes-tab/notes-tab";
+import { IActivity } from "@/types";
 
-export default function CustomerUserPortal() {
+interface CustomerUserPortalProps {
+  activities: IActivity[] | null;
+  customerId: number;
+}
+
+export default function CustomerUserPortal({
+  activities,
+  customerId,
+}: CustomerUserPortalProps) {
+  const [currentTab, setCurrentTab] = useState<CustomerUserPortalTabType>(
+    CustomerUserPortalTabType.NOTES
+  );
+
   return (
-    <section className='flex flex-col w-[80%] pr-10'>
-      <nav className='flex justify-between items-center'>
-        <Link className='flex-1' href={"/"}>
-          Activity Timeline
-        </Link>
-        <Link className='flex-1' href={"/"}>
-          Notes
-        </Link>
-        <Link className='flex-1' href={"/"}>
-          Tasks
-        </Link>
-        <Link className='flex-1' href={"/"}>
-          Meetings
-        </Link>
-        <Link className='flex-1' href={"/"}>
-          Deaks
-        </Link>
-      </nav>
+    <section className='flex flex-col w-[70%] py-10 mr-5 border border-slate-200'>
+      <CustomerUserPortalNavBar setCurrentTab={setCurrentTab} />
+
+      <div className='p-10'>
+        {currentTab === CustomerUserPortalTabType.ACTIVITY_TIMELINE && (
+          <div>Activity Timeline</div>
+        )}
+        {currentTab === CustomerUserPortalTabType.NOTES && (
+          <NotesTab
+            initialNotes={activities?.filter(
+              (activity) => activity.activity_type == ActivityType.NOTE
+            )}
+            customerId={customerId}
+          />
+        )}
+        {currentTab === CustomerUserPortalTabType.TASKS && <div>Tasks</div>}
+        {currentTab === CustomerUserPortalTabType.MEETINGS && (
+          <div>Meetings</div>
+        )}
+        {currentTab === CustomerUserPortalTabType.DEALS && <div>Deals</div>}
+      </div>
     </section>
   );
 }

@@ -13,6 +13,10 @@ import getCustomersBasedOnStatus from "./getCustomersBasedOnStatus";
 import getProspects from "./getProspects";
 import searchForCustomer from "./searchForCustomer";
 import filterCustomers from "./filterCustomers";
+import deleteActivity from "./deleteActivity";
+import getActivities from "./getActivities";
+import patchActivity from "./patchActivity";
+import createActivity from "./createActivity";
 
 export {
   addCustomer,
@@ -30,4 +34,8 @@ export {
   getProspects,
   searchForCustomer,
   filterCustomers,
+  deleteActivity,
+  getActivities,
+  patchActivity,
+  createActivity,
 };

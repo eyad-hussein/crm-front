@@ -27,8 +27,6 @@ export default function CustomerSection({
     console.log("filtering customers, client side", formData);
     const customers = await filterCustomers(status, formData);
 
-    console.log(customers);
-
     if (customers) {
       setCustomers(customers);
     }
