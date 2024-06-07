@@ -11,6 +11,7 @@ import ICity from "./city";
 import IState from "./state";
 import IPostalCode from "./postal-code";
 import IContact from "./contact";
+import IActivity from "./activity";
 
 export {
   IAccount,
@@ -24,4 +25,5 @@ export {
   IProspect,
   IPostalCode,
   IContact,
+  IActivity,
 };
