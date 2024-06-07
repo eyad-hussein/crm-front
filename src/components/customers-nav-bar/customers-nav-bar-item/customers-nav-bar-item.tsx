@@ -5,15 +5,19 @@ interface CustomersNavBarItemProps {
   href: string;
   icon: StaticImageData;
   name: string;
+  active?: boolean;
 }
 
 export default function CustomersNavBarItem({
   href,
   icon,
   name,
+  active = false,
 }: CustomersNavBarItemProps) {
+  let classes = "w-full list-none py-5 px-10";
+  classes += active ? " text-slate-100" : "";
   return (
-    <li className='w-full list-none py-5 px-10'>
+    <li className={classes}>
       <CustomersNavBarLink name={name} icon={icon} href={href} />
     </li>
   );
