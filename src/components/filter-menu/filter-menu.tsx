@@ -1,6 +1,6 @@
 import { FormEvent } from "react";
 import FormSelect from "../form-elements/form-select/form-select";
-import { LeadSourceType, SalutationType } from "@/enums";
+import { LeadSourceType } from "@/enums";
 
 interface FilterMenuProps {
   handleFilter: (formData: FormData) => void;
@@ -52,20 +52,6 @@ export default function FilterMenu({ handleFilter }: FilterMenuProps) {
             return (
               <option key={lead_source} value={lead_source}>
                 {lead_source}
-              </option>
-            );
-          })}
-        </FormSelect>
-      </div>
-      <div className='flex justify-between items-center'>
-        <label className='mb-2' htmlFor='salutations' />
-        Salutation
-        <label />
-        <FormSelect name='salutations'>
-          {Object.values(SalutationType).map((salutation) => {
-            return (
-              <option key={salutation} value={salutation}>
-                {salutation}
               </option>
             );
           })}

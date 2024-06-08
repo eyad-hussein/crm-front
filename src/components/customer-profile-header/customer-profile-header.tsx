@@ -1,7 +1,7 @@
 import Image from "next/image";
-import profilePicture from "../../../public/assets/images/images/IMG_0003.jpg";
-import locationIcon from "../../../public/assets/images/icons/location.png";
-import telephoneIcon from "../../../public/assets/images/icons/telephone.png";
+import profilePicture from "@/public/assets/images/images/IMG_0003.jpg";
+import locationIcon from "@/public/assets/images/icons/location.png";
+import telephoneIcon from "@/public/assets/images/icons/telephone.png";
 import HorizontalDivider from "../horizontal-divider/horizontal-divider";
 import { ICustomer } from "@/types";
 

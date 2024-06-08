@@ -1,82 +1,82 @@
-import { CustomerStatusType, IndustryType, SalutationType } from "@/enums";
+"use client";
+import { CustomerStatusType } from "@/enums";
 import { LeadSourceType } from "@/enums/lead-source-type";
 import {
   getUsers,
   getCountries,
-  getAccounts,
+  getIndustries,
   createCustomer,
-  getCities,
-  getStates,
+  getCitiesByStateId,
+  getExtensions,
+  getStatesByCountryId,
 } from "@/actions";
+import { useEffect, useState } from "react";
 import CancelButtonBig from "@/components/buttons/cancel-button/cancel-button-big";
 import FormLabel from "@/components/form-elements/form-label/form-label";
 import FormSelect from "@/components/form-elements/form-select/form-select";
 import FormInput from "@/components/form-elements/form-input/form-input";
+import { ICity, ICountry, IExtension, IIndustry, IState, IUser } from "@/types";
 
-export default async function CreateCustomerFormPage() {
-  const [users, countries, accounts, cities, states] = await Promise.all([
-    getUsers(),
-    getCountries(),
-    getAccounts(),
-    getCities(),
-    getStates(),
-  ]);
+export default function CreateCustomerFormPage() {
+  const [users, setUsers] = useState<IUser[] | null>([]);
+  const [countries, setCountries] = useState<ICountry[] | null>([]);
+  const [industries, setIndustries] = useState<IIndustry[] | null>([]);
+  const [cities, setCities] = useState<ICity[] | null>([]);
+  const [states, setStates] = useState<IState[] | null>([]);
+  const [extensions, setExtensions] = useState<IExtension[] | null>([]);
+
+  useEffect(() => {
+    const initialize = async () => {
+      const [users, countries, industries, extensions] = await Promise.all([
+        getUsers(),
+        getCountries(),
+        getIndustries(),
+        getExtensions(),
+      ]);
+      setUsers(users);
+      setCountries(countries);
+      setIndustries(industries);
+      setExtensions(extensions);
+    };
+
+    console.log("Initializing");
+    initialize();
+  }, []);
+
+  const handleCountryChange = async (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    console.log("Handling country change");
+    const countryId = e.target.value;
+    const states = await getStatesByCountryId(countryId);
+    setStates(states);
+    setCities([]);
+  };
+
+  const handleStateChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log("Handling state change");
+    const stateId = e.target.value;
+    const cities = await getCitiesByStateId(stateId);
+    setCities(cities);
+  };
 
   return (
     <div>
       <h1 className='mb-6 text-3xl'>Add a new Customer</h1>
       <form className='w-full flex justify-between' action={createCustomer}>
         <div className='w-1/2 mr-12'>
-          <div className='w-full mb-6'>
-            <FormLabel
-              className='mb-2'
-              htmlFor='salutation'
-              content='Salutation'
-            />
-            <FormSelect name='salutations'>
-              {Object.values(SalutationType).map((salutation) => {
-                return (
-                  <option key={salutation} value={salutation}>
-                    {salutation}
-                  </option>
-                );
-              })}
-            </FormSelect>
-          </div>
-
-          <div className='flex flex-wrap -mx-3 mb-6'>
+          <div className='flex flex-wrap -mx-3 mb-3'>
             <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
-              <FormLabel
-                className='mb-2'
-                htmlFor='first_name'
-                content='First Name'
-              />
-              <FormInput name='first_name' type='text' placeholder='Jane' />
+              <FormLabel className='mb-2' htmlFor='name' content='Name' />
+              <FormInput name='name' type='text' placeholder='Jane' />
             </div>
             <div className='w-full md:w-1/2 px-3'>
-              <FormLabel
-                className='mb-2'
-                htmlFor='last_name'
-                content='Last Name'
+              <FormLabel className='mb-2' htmlFor='email' content='Email' />
+              <FormInput
+                name='email'
+                type='text'
+                placeholder='example@gmail.com'
               />
-              <FormInput name='last_name' type='text' placeholder='Doe' />
-            </div>
-          </div>
-
-          <div className='w-full mb-6'>
-            <FormLabel
-              className='mb-2'
-              htmlFor='account_name'
-              content='Company'
-            />
-
-            <FormInput name='account_name' type='text' placeholder='Company' />
-          </div>
-
-          <div className='flex flex-wrap -mx-3 mb-6'>
-            <div className='w-full px-3 mb-6 md:mb-0'>
-              <FormLabel className='mb-2' htmlFor='title' content='Title' />
-              <FormInput name='title' type='text' placeholder='CEO' />
             </div>
           </div>
 
@@ -101,6 +101,24 @@ export default async function CreateCustomerFormPage() {
             </FormSelect>
           </div>
 
+          <div className='w-full mb-6'>
+            <FormLabel
+              className='mb-2'
+              htmlFor='industry_id'
+              content='Industry'
+            />
+            <FormSelect name='industry_id'>
+              {industries?.map((industry) => {
+                return (
+                  <option key={industry.id} value={industry.id}>
+                    {industry.industry_name[0].toUpperCase() +
+                      industry.industry_name.slice(1)}
+                  </option>
+                );
+              })}
+            </FormSelect>
+          </div>
+
           <div className='flex flex-wrap -mx-3 mb-6'>
             <div className='w-full px-3'>
               <FormLabel
@@ -117,11 +135,43 @@ export default async function CreateCustomerFormPage() {
               />
             </div>
           </div>
+          <div className='w-full mb-3'>
+            <FormLabel className='mb-2' htmlFor='user_id' content='Assignee' />
+            <FormSelect name='user_id'>
+              {users?.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.first_name &&
+                    user.last_name &&
+                    `${
+                      user.first_name[0].toUpperCase() +
+                      user.first_name!.slice(1)
+                    } ${
+                      user.last_name[0].toUpperCase() + user.last_name.slice(1)
+                    }`}
+                </option>
+              ))}
+            </FormSelect>
+          </div>
         </div>
 
         <div className='w-1/2 ml-12'>
-          <div className='flex flex-wrap -mx-3 mb-3'>
-            <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
+          <div className='flex mb-3'>
+            <div className='w-1/4'>
+              <FormLabel
+                className='mb-2'
+                htmlFor='extension_id'
+                content='Extension'
+              />
+              <FormSelect name='extension_id'>
+                {extensions?.map((extension) => (
+                  <option key={extension.id} value={extension.id}>
+                    {extension.extension}
+                  </option>
+                ))}
+              </FormSelect>
+            </div>
+
+            <div className='w-full px-3 mb-6 md:mb-0'>
               <FormLabel
                 className='mb-2'
                 htmlFor='customer_phone_number'
@@ -130,15 +180,7 @@ export default async function CreateCustomerFormPage() {
               <FormInput
                 name='customer_phone_number'
                 type='text'
-                placeholder='+20011256254'
-              />
-            </div>
-            <div className='w-full md:w-1/2 px-3'>
-              <FormLabel className='mb-2' htmlFor='email' content='Email' />
-              <FormInput
-                name='email'
-                type='text'
-                placeholder='example@gmail.com'
+                placeholder='011256254'
               />
             </div>
           </div>
@@ -149,7 +191,8 @@ export default async function CreateCustomerFormPage() {
               htmlFor='country_id'
               content='Country'
             />
-            <FormSelect name='country_id'>
+            <FormSelect name='country_id' onChange={handleCountryChange}>
+              <option value='none'>Choose</option>
               {countries?.map((country) => (
                 <option key={country.id} value={country.id}>
                   {country.country_name}
@@ -162,6 +205,7 @@ export default async function CreateCustomerFormPage() {
             <div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
               <FormLabel className='mb-2' htmlFor='city_id' content='City' />
               <FormSelect name='city_id'>
+                <option value='none'>Choose</option>
                 {cities?.map((city) => (
                   <option key={city.id} value={city.id}>
                     {city.city_name}
@@ -171,7 +215,8 @@ export default async function CreateCustomerFormPage() {
             </div>
             <div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
               <FormLabel className='mb-2' htmlFor='state_id' content='State' />
-              <FormSelect name='state_id'>
+              <FormSelect name='state_id' onChange={handleStateChange}>
+                <option value='none'>Choose</option>
                 {states?.map((state) => (
                   <option key={state.id} value={state.id}>
                     {state.state_name}
@@ -185,22 +230,24 @@ export default async function CreateCustomerFormPage() {
             </div>
           </div>
 
-          <div className='flex flex-wrap -mx-3 mb-6'>
-            <div className='w-full px-3 mb-6 md:mb-0'>
-              <FormLabel
-                className='mb-2'
-                htmlFor='number_of_employees'
-                content='No. Employees'
-              />
-              <FormInput
-                name='number_of_employees'
-                type='number'
-                placeholder='50'
-              />
-            </div>
+          <div className='w-full mb-6'>
+            <FormLabel
+              className='mb-2'
+              htmlFor='address_line1'
+              content='address_line1'
+            />
+            <FormInput name='address_line1' type='text' placeholder='90210' />
+          </div>
+          <div className='w-full mb-6'>
+            <FormLabel
+              className='mb-2'
+              htmlFor='address_line2'
+              content='address_line2'
+            />
+            <FormInput name='address_line2' type='text' placeholder='90210' />
           </div>
 
-          <div className='w-full mb-9'>
+          <div className='w-full mb-6'>
             <FormLabel
               className='mb-2'
               htmlFor='lead_source'
@@ -243,38 +290,6 @@ export default async function CreateCustomerFormPage() {
               })}
             </FormSelect>
           </div>
-
-          <div className='w-full mb-3'>
-            <FormLabel className='mb-2' htmlFor='user_id' content='Assignee' />
-            <FormSelect name='user_id'>
-              {users?.map((user) => (
-                <option key={user.id} value={user.id}>
-                  {user.first_name &&
-                    user.last_name &&
-                    `${
-                      user.first_name[0].toUpperCase() +
-                      user.first_name!.slice(1)
-                    } ${
-                      user.last_name[0].toUpperCase() + user.last_name.slice(1)
-                    }`}
-                </option>
-              ))}
-            </FormSelect>
-          </div>
-
-          <div className='w-full mb-6'>
-            <FormLabel className='mb-2' htmlFor='industry' content='Industry' />
-            <FormSelect name='industry'>
-              {Object.values(IndustryType).map((industry) => {
-                return (
-                  <option key={industry} value={industry}>
-                    {industry[0].toUpperCase() + industry.slice(1)}
-                  </option>
-                );
-              })}
-            </FormSelect>{" "}
-          </div>
-
           <div className='w-full flex justify-between'>
             <div className='ml-auto mr-5'>
               <CancelButtonBig />

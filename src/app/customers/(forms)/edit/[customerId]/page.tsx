@@ -1,9 +1,9 @@
-import { CustomerStatusType, IndustryType, SalutationType } from "@/enums";
+import { CustomerStatusType } from "@/enums";
 import { LeadSourceType } from "@/enums/lead-source-type";
 import {
   getUsers,
   getCountries,
-  getAccounts,
+  getIndustries,
   putCustomer,
   getCustomer,
   getCities,
@@ -41,26 +41,6 @@ export default async function EditFormPage({ params }: EditFormPageProps) {
         className='w-full flex justify-between'
         action={putCustomer.bind(null, customer)}>
         <div className='w-1/2 mr-12'>
-          <div className='w-full mb-6'>
-            <FormLabel
-              className='mb-2'
-              htmlFor='salutation'
-              content='Salutation'
-            />
-            <FormSelect name='salutations'>
-              {Object.values(SalutationType).map((salutation) => {
-                return (
-                  <option
-                    selected={salutation == customer.salutation}
-                    key={salutation}
-                    value={salutation}>
-                    {salutation}
-                  </option>
-                );
-              })}
-            </FormSelect>
-          </div>
-
           <div className='flex flex-wrap -mx-3 mb-6'>
             <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
               <FormLabel

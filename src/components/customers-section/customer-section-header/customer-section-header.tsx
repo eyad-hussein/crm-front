@@ -1,10 +1,10 @@
 import CustomersNavBarIconLink from "../customer-section-nav/customers-nav-bar-icon-link/customers-nav-bar-icon-link";
-import infoIcon from "../../../../public/assets/images/icons/info.png";
-import starIcon from "../../../../public/assets/images/icons/star.png";
-import messageIcon from "../../../../public/assets/images/icons/message.png";
-import uploadIcon from "../../../../public/assets/images/icons/upload.png";
-import dotsIcon from "../../../../public/assets/images/icons/dots.png";
-import userProfileIcon from "../../../../public/assets/images/icons/profile-user.png";
+import infoIcon from "@/public/assets/images/icons/info.png";
+import starIcon from "@/public/assets/images/icons/star.png";
+import messageIcon from "@/public/assets/images/icons/message.png";
+import uploadIcon from "@/public/assets/images/icons/upload.png";
+import dotsIcon from "@/public/assets/images/icons/dots.png";
+import userProfileIcon from "@/public/assets/images/icons/profile-user.png";
 
 CustomersNavBarIconLink;
 interface CustomerSectionHeaderProps {

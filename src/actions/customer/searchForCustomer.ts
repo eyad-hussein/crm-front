@@ -1,7 +1,14 @@
 "use server";
 import { ICustomerStatus } from "@/types";
 import axios from "axios";
-const searchForCustomer = async (status: string, query?: string) => {
+const searchForCustomer = async (
+  status: string,
+  query?: string,
+  searchFilters?: string
+) => {
+  console.log("searching for customer", "params", query);
+  console.log("searching for customer", "params", searchFilters);
+
   try {
     console.log("searching for customer", "params", query);
 

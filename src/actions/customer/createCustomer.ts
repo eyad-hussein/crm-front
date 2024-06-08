@@ -25,13 +25,6 @@ const createCustomer = async (formData: FormData) => {
       postal_code: data["postal_code"],
     };
 
-    data["account"] = {
-      account_name: data["account_name"],
-      industry: data["industry"],
-      website: data["website"],
-      number_of_employees: data["number_of_employees"],
-    };
-
     const response = await axios.post(
       `${process.env.BACKEND_API_URL}/customers`,
       data

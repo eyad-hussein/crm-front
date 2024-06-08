@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import editIcon from "../../../../public/assets/images/icons/edit.png";
+import editIcon from "@/public/assets/images/icons/edit.png";
 
 export default function EditButton({ customerId }: { customerId: number }) {
   return (

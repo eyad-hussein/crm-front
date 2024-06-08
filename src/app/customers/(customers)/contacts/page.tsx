@@ -7,12 +7,15 @@ export default async function ContactsPage({
 }: {
   searchParams?: {
     query?: string;
+    searchFilters?: string;
   };
 }) {
-  console.log("query, in page", searchParams?.query);
-
   const response = await (searchParams?.query
-    ? searchForCustomer("contacts", searchParams.query)
+    ? searchForCustomer(
+        "contacts",
+        searchParams.query,
+        searchParams.searchFilters
+      )
     : getCustomersBasedOnStatus("contacts"));
 
   return (

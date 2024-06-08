@@ -1,11 +1,11 @@
 "use client";
 import FlatButton from "@/components/buttons/flat-button/flat-button";
 import TransparentButton from "@/components/buttons/transparent-button/transparent-button";
-import searchIcon from "../../../../public/assets/images/icons/search.png";
-import userProfileIcon from "../../../../public/assets/images/icons/profile-user.png";
-import filterIcon from "../../../../public/assets/images/icons/filter.png";
-import sortIcon from "../../../../public/assets/images/icons/sort.png";
-import hideIcon from "../../../../public/assets/images/icons/hide.png";
+import searchIcon from "@/public/assets/images/icons/search.png";
+import userProfileIcon from "@/public/assets/images/icons/profile-user.png";
+import filterIcon from "@/public/assets/images/icons/filter.png";
+import sortIcon from "@/public/assets/images/icons/sort.png";
+import hideIcon from "@/public/assets/images/icons/hide.png";
 import SearchButton from "@/components/buttons/search-button/search-button";
 import FilterButton from "@/components/buttons/filter-button/filter-button";
 
