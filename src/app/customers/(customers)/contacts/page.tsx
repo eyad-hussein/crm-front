@@ -1,7 +1,7 @@
 import CustomerSection from "@/components/customers-section/customers-section";
 import { getCustomersBasedOnStatus, searchForCustomer } from "@/actions";
 import { Suspense } from "react";
-
+import { logger } from "@/lib/logger";
 export default async function ContactsPage({
   searchParams,
 }: {
@@ -10,6 +10,7 @@ export default async function ContactsPage({
     searchFilters?: string;
   };
 }) {
+  logger.info({ searchParams }, "searchParams:");
   const response = await (searchParams?.query
     ? searchForCustomer(
         "contacts",
@@ -23,7 +24,7 @@ export default async function ContactsPage({
       <CustomerSection
         status='contacts'
         initialCustomers={response}
-        query={searchParams?.query}
+        searchParams={searchParams}
         title='Contacts'
       />
     </Suspense>

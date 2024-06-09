@@ -17,13 +17,23 @@ const createCustomer = async (formData: FormData) => {
       data[key] = value;
     });
 
-    data["customer_phone_number"] = {
-      phone_number: data["customer_phone_number"],
-    };
+    data["customer_phone_numbers"] = [
+      {
+        phone_number: data["customer_phone_numbers"],
+        extension_id: data["extension_id"],
+      },
+    ];
 
-    data["postal_code"] = {
-      postal_code: data["postal_code"],
-    };
+    data["addresses"] = [
+      {
+        address_line_1: data["address_line_1"],
+        address_line_2: data["address_line_2"],
+        city_id: data["city_id"],
+        state_id: data["state_id"],
+        country_id: data["country_id"],
+        postal_code: data["postal_code"],
+      },
+    ];
 
     const response = await axios.post(
       `${process.env.BACKEND_API_URL}/customers`,

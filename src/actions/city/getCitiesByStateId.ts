@@ -1,4 +1,5 @@
 "use server";
+import { logger } from "@/lib/logger";
 import { ICity } from "@/types";
 import axios from "axios";
 
@@ -6,7 +7,7 @@ const getCitiesByStateId = async (
   stateId: number | string
 ): Promise<ICity[] | null> => {
   try {
-    console.log("getting cities by state id");
+    logger.info("getting cities by state id");
     const response = await axios.get(
       `${process.env.BACKEND_API_URL}/states/${stateId}/cities`
     );

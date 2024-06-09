@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import CheckList from "@/components/check-list/check-list";
-
+import { logger } from "@/lib/logger";
 interface SearchButtonProps {
   src: string;
 }
@@ -20,30 +20,36 @@ export default function SearchButton({ src }: SearchButtonProps) {
     setIsExpanded(!isExpanded);
   };
 
+  // Ensure that the query and searchFilters are passed to handleSearch function
   const handleSearch = (queryValue: string, searchFilters: string[]) => {
-    const params = new URLSearchParams(searchParams);
+    // Verify that the selected filters and query are correctly captured
+    logger.info({ queryValue }, "queryValue:");
+    logger.info({ searchFilters }, "searchFilters:");
+
+    const params = new URLSearchParams();
     if (queryValue) {
       params.set("query", queryValue);
-    } else {
-      params.delete("query");
     }
     if (searchFilters.length > 0) {
       params.set("searchFilters", searchFilters.join(","));
-    } else {
-      params.delete("searchFilters");
     }
+    // Log the constructed URL for debugging
+    logger.info({ params: params.toString() }, "Constructed URL:");
+
+    // Pass params.toString() to the replace function
     replace(`${pathname}?${params.toString()}`);
   };
 
   useEffect(() => {
     handleSearch(query, selectedColumns);
-  }, [selectedColumns]);
+  }, [query, selectedColumns]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
     handleSearch(value, selectedColumns);
   };
+
   return (
     <button className='flex items-center text-black font-bold py-2 px-4 rounded text-sm'>
       <img

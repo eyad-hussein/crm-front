@@ -23,9 +23,7 @@ export default function CustomerProfileHeader({
         </div>
 
         <div className='ml-2'>
-          <h1 className='text-xl font-bold'>
-            {`${customer.first_name} ${customer.last_name}`}
-          </h1>
+          <h1 className='text-xl font-bold'>{`${customer.name}`}</h1>
 
           <div className='flex justify-between items-center mt-1'>
             <span className='flex items-center mr-3 h-full'>
@@ -34,7 +32,7 @@ export default function CustomerProfileHeader({
                 src={locationIcon.src}
                 alt='location'
               />
-              {customer.country.country_name}
+              {customer.addresses[0].country.country_name}
             </span>
             <span className='flex items-center'>
               <img
@@ -42,7 +40,7 @@ export default function CustomerProfileHeader({
                 src={telephoneIcon.src}
                 alt='phone'
               />
-              {customer.customer_phone_number?.phone_number}
+              {customer.customer_phone_numbers[0].phone_number}
             </span>
           </div>
         </div>
@@ -51,20 +49,12 @@ export default function CustomerProfileHeader({
       <HorizontalDivider />
       <div className='grid grid-cols-7 divide-x py-5'>
         <div className='pl-5'>
-          <span>Job Title</span>
-          <span className='block'>{customer.title}</span>
-        </div>
-        <div className='pl-5'>
           <span>Email</span>
           <span className='block'>{customer.email}</span>
         </div>
         <div className='pl-5'>
-          <span>Company</span>
-          <span className='block'>{customer.account.account_name}</span>
-        </div>
-        <div className='pl-5'>
           <span>Industry</span>
-          <span className='block'>{customer.account.industry}</span>
+          <span className='block'>{customer.industry.industry_name}</span>
         </div>
 
         <div className='pl-5'>

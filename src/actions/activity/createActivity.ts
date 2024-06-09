@@ -1,5 +1,5 @@
 "use server";
-
+import { logger } from "@/lib/logger";
 import { ActivityType } from "@/enums";
 import axios from "axios";
 
@@ -9,7 +9,7 @@ const createActivity = async (
   formData: FormData
 ) => {
   try {
-    console.log("Creating activity...", customerId);
+    logger.info({ customerId }, "Creating activity...");
     const data = Object.fromEntries(formData);
     data.activity_type = activityType;
     const response = await axios.post(

@@ -3,19 +3,14 @@ import { useState } from "react";
 import CheckListItem from "./check-list-item/check-list-item";
 
 const columns = [
-  "Name",
-  "Stage",
-  "Follow-Up Date",
-  "Industry",
-  "Company",
-  "Country",
-  "Lead Source",
-  "Job Title",
-  "Phone",
-  "Email",
-  "Category",
-  "Assignee",
-  "Activity",
+  { labelName: "Name", name: "name" },
+  { labelName: "Follow-Up Date", name: "follow_up_date" },
+  { labelName: "Industry", name: "industry" },
+  { labelName: "Country", name: "country" },
+  { labelName: "Lead Source", name: "lead_source" },
+  { labelName: "Phone", name: "phone_number" },
+  { labelName: "Email", name: "email" },
+  { labelName: "Assignee", name: "user" },
 ];
 
 export default function CheckList({
@@ -29,7 +24,7 @@ export default function CheckList({
     if (selectedColumns.length === columns.length) {
       setSelectedColumns([]);
     } else {
-      setSelectedColumns(columns);
+      setSelectedColumns(columns.map((column) => column.name));
     }
   };
 
@@ -54,7 +49,8 @@ export default function CheckList({
       <div className='flex flex-col items-start'>
         <div className='flex justify-between w-full'>
           <CheckListItem
-            name='Select All'
+            labelName='Select All'
+            name='select-all'
             onChange={handleSelectAll}
             selected={selectedColumns.length === columns.length}
           />
@@ -63,10 +59,11 @@ export default function CheckList({
         {columns.map((column) => {
           return (
             <CheckListItem
-              onChange={(event) => handleOnChange(column, event.target)}
-              selected={selectedColumns.includes(column)}
-              key={column}
-              name={column}
+              name={column.name}
+              onChange={(event) => handleOnChange(column.name, event.target)}
+              selected={selectedColumns.includes(column.name)}
+              key={column.name}
+              labelName={column.labelName}
             />
           );
         })}

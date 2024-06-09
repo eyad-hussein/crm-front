@@ -7,6 +7,9 @@ import IService from "./service";
 import IPhoneNumber from "./phone-number";
 import ICity from "./city";
 import IPostalCode from "./postal-code";
+import IActivity from "./activity";
+import IAddress from "./address";
+import IIndustry from "./industry";
 
 export default interface ICustomer {
   id: number;
@@ -15,11 +18,18 @@ export default interface ICustomer {
   priority: number;
   description: string;
   follow_up_date: Date | null;
+  website: string;
   status: CustomerStatusType;
   lead_source: LeadSourceType;
-  postal_code: string;
-  industry_id: number;
-  user_id: number;
   createdAt: Date;
   updatedAt: Date;
+  industry_id: number;
+  user_id: number;
+  image_id: number | null;
+  customer_phone_numbers: ICustomerPhoneNumber[];
+  user: IUser;
+  industry: IIndustry;
+  services: IService[];
+  activities: IActivity[];
+  addresses: IAddress[];
 }

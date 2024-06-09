@@ -1,4 +1,5 @@
 "use client";
+import { logger } from "@/lib/logger";
 import { useState } from "react";
 import { patchCustomerStatus } from "@/actions";
 import { CustomerStatusType } from "@/enums";
@@ -17,7 +18,7 @@ export default function CustomerStatus({
   >(oldCustomerStatus);
 
   const handleOnClick = async (status: CustomerStatusType) => {
-    console.log("patching customer status, client side");
+    logger.info("patching customer status, client side");
     setCurrentCustomerStatus(status);
     await patchCustomerStatus(customerId!, status);
   };

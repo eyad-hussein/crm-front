@@ -1,4 +1,5 @@
 "use server";
+import { logger } from "@/lib/logger";
 import { ICustomerStatus } from "@/types";
 import axios from "axios";
 const searchForCustomer = async (
@@ -6,19 +7,20 @@ const searchForCustomer = async (
   query?: string,
   searchFilters?: string
 ) => {
-  console.log("searching for customer", "params", query);
-  console.log("searching for customer", "params", searchFilters);
+  logger.info({ query }, "searching for customer query:");
+  logger.info({ searchFilters, status }, "searching for customer params");
 
   try {
-    console.log("searching for customer", "params", query);
+    logger.info("searching for customer");
 
     const response = await axios.get<ICustomerStatus[]>(
-      `${process.env.BACKEND_API_URL}/customers/search?query=${query}&status=${status}`
+      `${process.env.BACKEND_API_URL}/customers/search?query=${query}&status=${status}&searchFilters=${searchFilters}`
     );
 
+    logger.info({ response: response.data }, "customers");
     return response.data;
   } catch (error) {
-    console.log("error", error);
+    logger.error(error);
     return null;
   }
 };

@@ -1,11 +1,12 @@
 "use server";
 
+import { logger } from "@/lib/logger";
 import axios from "axios";
 import { ICustomerStatus } from "@/types";
 
 const filterCustomers = async (status: string, formData: FormData) => {
   try {
-    console.log("filtering customers");
+    logger.info("filtering customers");
 
     const data: { [key: string]: any } = {};
 
@@ -22,7 +23,7 @@ const filterCustomers = async (status: string, formData: FormData) => {
 
     return response.data;
   } catch (error) {
-    console.log("error", error);
+    logger.info("error", error);
     return null;
   }
 };

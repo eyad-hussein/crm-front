@@ -1,4 +1,5 @@
 "use client";
+import { logger } from "@/lib/logger";
 import { CustomerStatusType } from "@/enums";
 import { LeadSourceType } from "@/enums/lead-source-type";
 import {
@@ -39,14 +40,14 @@ export default function CreateCustomerFormPage() {
       setExtensions(extensions);
     };
 
-    console.log("Initializing");
+    logger.info("Initializing");
     initialize();
   }, []);
 
   const handleCountryChange = async (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    console.log("Handling country change");
+    logger.info("Handling country change");
     const countryId = e.target.value;
     const states = await getStatesByCountryId(countryId);
     setStates(states);
@@ -54,7 +55,7 @@ export default function CreateCustomerFormPage() {
   };
 
   const handleStateChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log("Handling state change");
+    logger.info("Handling state change");
     const stateId = e.target.value;
     const cities = await getCitiesByStateId(stateId);
     setCities(cities);
@@ -174,11 +175,11 @@ export default function CreateCustomerFormPage() {
             <div className='w-full px-3 mb-6 md:mb-0'>
               <FormLabel
                 className='mb-2'
-                htmlFor='customer_phone_number'
+                htmlFor='customer_phone_numbers'
                 content='Phone Number'
               />
               <FormInput
-                name='customer_phone_number'
+                name='customer_phone_numbers'
                 type='text'
                 placeholder='011256254'
               />
@@ -233,18 +234,18 @@ export default function CreateCustomerFormPage() {
           <div className='w-full mb-6'>
             <FormLabel
               className='mb-2'
-              htmlFor='address_line1'
-              content='address_line1'
+              htmlFor='address_line_1'
+              content='address_line_1'
             />
-            <FormInput name='address_line1' type='text' placeholder='90210' />
+            <FormInput name='address_line_1' type='text' placeholder='90210' />
           </div>
           <div className='w-full mb-6'>
             <FormLabel
               className='mb-2'
-              htmlFor='address_line2'
-              content='address_line2'
+              htmlFor='address_line_2'
+              content='address_line_2'
             />
-            <FormInput name='address_line2' type='text' placeholder='90210' />
+            <FormInput name='address_line_2' type='text' placeholder='90210' />
           </div>
 
           <div className='w-full mb-6'>

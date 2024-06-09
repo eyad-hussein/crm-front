@@ -1,4 +1,5 @@
 "use client";
+import { logger } from "@/lib/logger";
 import { ICustomerStatus } from "@/types";
 import CustomersList from "../customers-list/customers-list";
 import CustomerSectionHeader from "./customer-section-header/customer-section-header";
@@ -10,21 +11,24 @@ interface CustomerSectionProps {
   title: string;
   initialCustomers: ICustomerStatus[] | null;
   status: string;
-  query?: string;
+  searchParams?: {
+    query?: string;
+    searchFilters?: string;
+  };
 }
 
 export default function CustomerSection({
   status,
   title,
   initialCustomers,
-  query,
+  searchParams,
 }: CustomerSectionProps) {
   const [customers, setCustomers] = useState<ICustomerStatus[] | null>(
     initialCustomers
   );
 
   const handleFilter = async (formData: FormData) => {
-    console.log("filtering customers, client side", formData);
+    logger.info({ formData }, "filtering customers, client side");
     const customers = await filterCustomers(status, formData);
 
     if (customers) {
@@ -38,7 +42,7 @@ export default function CustomerSection({
       <CustomersList
         initialCustomers={customers}
         status={status}
-        query={query}
+        searchParams={searchParams}
       />
     </section>
   );

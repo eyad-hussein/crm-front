@@ -13,6 +13,7 @@ import IPostalCode from "./postal-code";
 import IContact from "./contact";
 import IActivity from "./activity";
 import IExtension from "./extension";
+import IAddress from "./address";
 
 export {
   IIndustry,
@@ -30,4 +31,5 @@ export {
   ICity,
   IState,
   IExtension,
+  IAddress,
 };
