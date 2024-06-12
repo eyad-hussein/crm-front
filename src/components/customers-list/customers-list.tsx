@@ -88,7 +88,6 @@ export default function CustomersList({
           <tr className=''>
             <th></th>
             <th>Name</th>
-            <th>Stage</th>
             <th>Follow-Up</th>
             <th>Industry</th>
             <th>Country</th>
@@ -119,12 +118,7 @@ export default function CustomersList({
                     {`${customerData.name}`}
                     <EditButton customerId={customerData.id} />
                   </td>
-                  <td
-                    onClick={() =>
-                      handleOnClick(customerData.id, customerData.status)
-                    }>
-                    Stage
-                  </td>
+
                   <td
                     onClick={() =>
                       handleOnClick(customerData.id, customerData.status)

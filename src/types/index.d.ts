@@ -14,6 +14,7 @@ import IContact from "./contact";
 import IActivity from "./activity";
 import IExtension from "./extension";
 import IAddress from "./address";
+import { Pair } from "./pair";
 
 export {
   IIndustry,
@@ -32,4 +33,5 @@ export {
   IState,
   IExtension,
   IAddress,
+  Pair,
 };

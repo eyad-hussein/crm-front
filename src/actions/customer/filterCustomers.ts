@@ -21,6 +21,8 @@ const filterCustomers = async (status: string, formData: FormData) => {
       data
     );
 
+    logger.info({ message: "filtered customers", customers: response.data });
+
     return response.data;
   } catch (error) {
     logger.info("error", error);

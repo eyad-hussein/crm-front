@@ -20,6 +20,7 @@ import createActivity from "./activity/createActivity";
 import getExtensions from "./extension/getExtensions";
 import getStatesByCountryId from "./state/getStatesByCountryId";
 import getCitiesByStateId from "./city/getCitiesByStateId";
+import sortCustomers from "./customer/sortCustomers";
 
 export {
   addCustomer,
@@ -44,4 +45,5 @@ export {
   getExtensions,
   getStatesByCountryId,
   getCitiesByStateId,
+  sortCustomers,
 };

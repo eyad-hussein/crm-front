@@ -5,7 +5,7 @@ import CustomersList from "../customers-list/customers-list";
 import CustomerSectionHeader from "./customer-section-header/customer-section-header";
 import CustomerSectionNav from "./customer-section-nav/customer-section-nav";
 import { useState } from "react";
-import { filterCustomers } from "@/actions";
+import { filterCustomers, sortCustomers } from "@/actions";
 
 interface CustomerSectionProps {
   title: string;
@@ -35,10 +35,18 @@ export default function CustomerSection({
       setCustomers(customers);
     }
   };
+
+  const handleSort = async (formData: FormData) => {
+    const sortedCustomers = await sortCustomers(customers, formData);
+
+    if (sortedCustomers) {
+      setCustomers(sortedCustomers);
+    }
+  };
   return (
     <section className='flex flex-col w-full'>
       <CustomerSectionHeader title={title} />
-      <CustomerSectionNav handleFilter={handleFilter} />
+      <CustomerSectionNav handlers={{ handleFilter, handleSort }} />
       <CustomersList
         initialCustomers={customers}
         status={status}

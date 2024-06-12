@@ -8,13 +8,17 @@ import sortIcon from "@/public/assets/images/icons/sort.png";
 import hideIcon from "@/public/assets/images/icons/hide.png";
 import SearchButton from "@/components/buttons/search-button/search-button";
 import FilterButton from "@/components/buttons/filter-button/filter-button";
+import SortButton from "@/components/buttons/sort-button/sort-button";
 
 interface CustomerSectionNavProps {
-  handleFilter: (formData: FormData) => void;
+  handlers: {
+    handleFilter: (formData: FormData) => void;
+    handleSort: (formData: FormData) => void;
+  };
 }
 
 export default function CustomerSectionNav({
-  handleFilter,
+  handlers: { handleFilter, handleSort },
 }: CustomerSectionNavProps) {
   return (
     <nav className='flex flex-col min-h-36 w-full mt-10 mb-5'>
@@ -29,7 +33,7 @@ export default function CustomerSectionNav({
           src={filterIcon.src}
           text='Filter'
         />
-        <TransparentButton src={sortIcon.src} text='Sort' />
+        <SortButton handleSort={handleSort} src={sortIcon.src} text='Sort' />
         <TransparentButton src={hideIcon.src} text='Hide' />
       </div>
     </nav>

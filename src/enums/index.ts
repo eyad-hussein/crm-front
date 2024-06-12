@@ -5,6 +5,7 @@ import { ServiceType } from "./service-type";
 import { CustomerSectionNavigationButtonType } from "./customer-section-nav-button-type";
 import { CustomerUserPortalTabType } from "./customer-user-portal-tab-type";
 import { ActivityType } from "./activity-type";
+import { SortingCategoryType } from "./sorting-category-type";
 
 export {
   CustomerStatusType,
@@ -14,4 +15,5 @@ export {
   CustomerSectionNavigationButtonType,
   CustomerUserPortalTabType,
   ActivityType,
+  SortingCategoryType,
 };
