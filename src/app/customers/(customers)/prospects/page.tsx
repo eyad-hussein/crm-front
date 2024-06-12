@@ -9,8 +9,6 @@ export default async function ProspectsPage({
     query?: string;
   };
 }) {
-  console.log("query, in page", searchParams?.query);
-
   const response = await (searchParams?.query
     ? searchForCustomer("prospects", searchParams.query)
     : getCustomersBasedOnStatus("prospects"));

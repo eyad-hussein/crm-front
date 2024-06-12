@@ -1,28 +1,32 @@
-import addCustomer from "./addCustomer";
-import getCountries from "./getCountries";
-import getUsers from "./getUsers";
-import getAccounts from "./getAccounts";
-import createCustomer from "./createCustomer";
-import putCustomer from "./putCustomer";
-import getCustomer from "./getCustomer";
-import patchCustomerStatus from "./patchCustomerStatus";
-import getCities from "./getCities";
-import getStates from "./getStates";
-import deleteCustomer from "./deleteCustomer";
-import getCustomersBasedOnStatus from "./getCustomersBasedOnStatus";
-import getProspects from "./getProspects";
-import searchForCustomer from "./searchForCustomer";
-import filterCustomers from "./filterCustomers";
-import deleteActivity from "./deleteActivity";
-import getActivities from "./getActivities";
-import patchActivity from "./patchActivity";
-import createActivity from "./createActivity";
+import addCustomer from "./customer/addCustomer";
+import getCountries from "./country/getCountries";
+import getUsers from "./user/getUsers";
+import getIndustries from "./industry/getIndustries";
+import createCustomer from "./customer/createCustomer";
+import putCustomer from "./customer/putCustomer";
+import getCustomer from "./customer/getCustomer";
+import patchCustomerStatus from "./customer/patchCustomerStatus";
+import getCities from "./city/getCities";
+import getStates from "./state/getStates";
+import deleteCustomer from "./customer/deleteCustomer";
+import getCustomersBasedOnStatus from "./customer/getCustomersBasedOnStatus";
+import getProspects from "./prospect/getProspects";
+import searchForCustomer from "./customer/searchForCustomer";
+import filterCustomers from "./customer/filterCustomers";
+import deleteActivity from "./activity/deleteActivity";
+import getActivities from "./activity/getActivities";
+import patchActivity from "./activity/patchActivity";
+import createActivity from "./activity/createActivity";
+import getExtensions from "./extension/getExtensions";
+import getStatesByCountryId from "./state/getStatesByCountryId";
+import getCitiesByStateId from "./city/getCitiesByStateId";
+import sortCustomers from "./customer/sortCustomers";
 
 export {
   addCustomer,
   getCountries,
   getUsers,
-  getAccounts,
+  getIndustries,
   createCustomer,
   putCustomer,
   getCustomer,
@@ -38,4 +42,8 @@ export {
   getActivities,
   patchActivity,
   createActivity,
+  getExtensions,
+  getStatesByCountryId,
+  getCitiesByStateId,
+  sortCustomers,
 };

@@ -1,14 +1,14 @@
 "use server";
-
+import { logger } from "@/lib/logger";
 import axios from "axios";
 
 const deleteActivity = async (activityId: number) => {
   try {
-    console.log("Deleting activity...", activityId);
+    logger.info({ activityId }, "Deleting activity...");
     const response = await axios.delete(
       `${process.env.BACKEND_API_URL}/activities/${activityId}`
     );
-    console.log(response.data);
+    logger.info({ response: response.data });
   } catch (error) {
     console.error("Failed to delete activity", error);
   }

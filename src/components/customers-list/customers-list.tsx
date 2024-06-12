@@ -1,4 +1,3 @@
-"use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useCallback } from "react";
@@ -12,15 +11,17 @@ import {
 interface CustomersListProps {
   initialCustomers: ICustomerStatus[] | null;
   status: string;
-  query?: string;
+  searchParams?: {
+    query?: string;
+    searchFilters?: string;
+  };
 }
 
 export default function CustomersList({
   initialCustomers,
   status,
-  query,
+  searchParams,
 }: CustomersListProps) {
-  console.log("renderew", initialCustomers);
   const router = useRouter();
 
   const [selected, setSelected] = useState<number[]>([]);
@@ -34,12 +35,18 @@ export default function CustomersList({
   }, [initialCustomers]);
 
   const fetchCustomers = useCallback(async () => {
-    if (query) {
-      setCustomers(await searchForCustomer(status, query));
+    if (searchParams?.query) {
+      setCustomers(
+        await searchForCustomer(
+          status,
+          searchParams.query,
+          searchParams.searchFilters
+        )
+      );
     } else {
       setCustomers(await getCustomersBasedOnStatus(status));
     }
-  }, [status, query]);
+  }, [status, searchParams]);
 
   useEffect(() => {
     fetchCustomers();
@@ -81,13 +88,10 @@ export default function CustomersList({
           <tr className=''>
             <th></th>
             <th>Name</th>
-            <th>Stage</th>
             <th>Follow-Up</th>
             <th>Industry</th>
-            <th>Company</th>
             <th>Country</th>
             <th>Lead Source</th>
-            <th>Job Title</th>
             <th>Phone</th>
             <th>Email</th>
             <th>Category</th>
@@ -111,15 +115,10 @@ export default function CustomersList({
                     />
                   </td>
                   <td>
-                    {`${customerData.first_name} ${customerData.last_name}`}
+                    {`${customerData.name}`}
                     <EditButton customerId={customerData.id} />
                   </td>
-                  <td
-                    onClick={() =>
-                      handleOnClick(customerData.id, customerData.status)
-                    }>
-                    Stage
-                  </td>
+
                   <td
                     onClick={() =>
                       handleOnClick(customerData.id, customerData.status)
@@ -130,19 +129,14 @@ export default function CustomersList({
                     onClick={() =>
                       handleOnClick(customerData.id, customerData.status)
                     }>
-                    {customerData.account.industry}
+                    {customerData.industry.industry_name}
                   </td>
                   <td
                     onClick={() =>
                       handleOnClick(customerData.id, customerData.status)
                     }>
-                    {customerData.account.account_name}
-                  </td>
-                  <td
-                    onClick={() =>
-                      handleOnClick(customerData.id, customerData.status)
-                    }>
-                    {customerData.country?.country_name}
+                    {customerData.addresses &&
+                      customerData.addresses[0].country.country_name}
                   </td>
                   <td
                     onClick={() =>
@@ -154,13 +148,8 @@ export default function CustomersList({
                     onClick={() =>
                       handleOnClick(customerData.id, customerData.status)
                     }>
-                    {customerData.title}
-                  </td>
-                  <td
-                    onClick={() =>
-                      handleOnClick(customerData.id, customerData.status)
-                    }>
-                    {customerData.customer_phone_number?.phone_number}
+                    {customerData.customer_phone_numbers.length &&
+                      customerData.customer_phone_numbers[0].phone_number}
                   </td>
                   <td
                     onClick={() =>

@@ -1,10 +1,10 @@
-import upIcon from "../../../../../public/assets/images/icons/up.png";
-import downIcon from "../../../../../public/assets/images/icons/down.png";
-import noteIcon from "../../../../../public/assets/images/icons/note.png";
-import deleteIcon from "../../../../../public/assets/images/icons/delete.png";
-import editIcon from "../../../../../public/assets/images/icons/edit.png";
+import upIcon from "@/public/assets/images/icons/up.png";
+import downIcon from "@/public/assets/images/icons/down.png";
+import noteIcon from "@/public/assets/images/icons/note.png";
+import deleteIcon from "@/public/assets/images/icons/delete.png";
+import editIcon from "@/public/assets/images/icons/edit.png";
 import HorizontalDivider from "@/components/horizontal-divider/horizontal-divider";
-import userProfile from "../../../../../public/assets/images/images/IMG_0003.jpg";
+import userProfile from "@/public/assets/images/images/IMG_0003.jpg";
 import Image from "next/image";
 import { useState } from "react";
 import FlatButton from "@/components/buttons/flat-button/flat-button";

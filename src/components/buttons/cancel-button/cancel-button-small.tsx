@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import cancelIcon from "../../../../public/assets/images/icons/close.png";
+import cancelIcon from "@/public/assets/images/icons/close.png";
 
 export default function CancelButtonSmall() {
   const router = useRouter();

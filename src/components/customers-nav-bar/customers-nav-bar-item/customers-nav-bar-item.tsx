@@ -15,7 +15,7 @@ export default function CustomersNavBarItem({
   active = false,
 }: CustomersNavBarItemProps) {
   let classes = "w-full list-none py-5 px-10";
-  classes += active ? " text-slate-100" : "";
+  classes += active ? " text-primary-light" : "";
   return (
     <li className={classes}>
       <CustomersNavBarLink name={name} icon={icon} href={href} />

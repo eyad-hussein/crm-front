@@ -1,5 +1,6 @@
 "use server";
 
+import { logger } from "@/lib/logger";
 import { ICustomer } from "@/types";
 import axios from "axios";
 
@@ -10,7 +11,7 @@ const getCustomer = async (customerId: string): Promise<ICustomer | null> => {
     );
     return response.data;
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     return null;
   }
 };

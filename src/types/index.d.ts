@@ -1,4 +1,4 @@
-import IAccount from "./account";
+import IIndustry from "./industry";
 import ICustomer from "./customer";
 import ICountry from "./country";
 import IUser from "./user";
@@ -12,9 +12,12 @@ import IState from "./state";
 import IPostalCode from "./postal-code";
 import IContact from "./contact";
 import IActivity from "./activity";
+import IExtension from "./extension";
+import IAddress from "./address";
+import { Pair } from "./pair";
 
 export {
-  IAccount,
+  IIndustry,
   ICustomer,
   ICountry,
   IUser,
@@ -26,4 +29,9 @@ export {
   IPostalCode,
   IContact,
   IActivity,
+  ICity,
+  IState,
+  IExtension,
+  IAddress,
+  Pair,
 };

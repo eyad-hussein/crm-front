@@ -1,14 +1,15 @@
 "use server";
 
+import { logger } from "@/lib/logger";
 import axios from "axios";
 
 const deleteCustomer = async (customerId: number) => {
   try {
-    console.log("deleting customer", customerId);
+    logger.info({ customerId }, "deleting customer");
     const response = await axios.delete(
       `http://localhost:5000/customers/${customerId}`
     );
-    console.log(response);
+    logger.info({ response: response });
   } catch (error) {
     console.error(error);
   }

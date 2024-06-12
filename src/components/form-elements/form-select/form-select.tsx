@@ -1,15 +1,21 @@
 interface FormSelectProps {
   name: string;
   children: React.ReactNode;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export default function FormSelect({ name, children }: FormSelectProps) {
+export default function FormSelect({
+  name,
+  children,
+  onChange,
+}: FormSelectProps) {
   return (
     <div className='relative'>
       <select
         className='block appearance-none w-full bg-white border text-gray-700 py-3 px-4 pr-8 rounded leading-tight border-gray-500'
         name={name}
-        id={name}>
+        id={name}
+        onChange={onChange}>
         {children}
       </select>
       <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700'>

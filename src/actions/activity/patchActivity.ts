@@ -1,5 +1,5 @@
 "use server";
-
+import { logger } from "@/lib/logger";
 import axios from "axios";
 
 const patchActivity = async (
@@ -8,13 +8,13 @@ const patchActivity = async (
   formData: FormData
 ) => {
   try {
-    console.log("Patching activity: ", activityId);
+    logger.info({ activityId }, "Patching activity: ");
     const response = await axios.patch(
       `${process.env.BACKEND_API_URL}/customers/${customerId}/activities/${activityId}`,
       Object.fromEntries(formData)
     );
 
-    console.log(response.data);
+    logger.info({ response: response.data });
   } catch (error) {
     console.error("Error patching activity: ", error);
     return [];
