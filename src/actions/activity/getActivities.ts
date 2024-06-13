@@ -1,19 +1,21 @@
 "use server";
 import { logger } from "@/lib/logger";
-import { IActivity } from "@/types";
+import { IActivities } from "@/types";
 import axios from "axios";
 
-const getActivities = async (customerId: string) => {
+const getActivities = async (
+  customerId: string
+): Promise<IActivities | null> => {
   try {
-    logger.info({ customerId }, "Getting activities for customer: ");
-    const response = await axios.get<IActivity[]>(
+    logger.info({ message: "Getting activities for customer: ", customerId });
+    const response = await axios.get<IActivities | null>(
       `${process.env.BACKEND_API_URL}/customers/${customerId}/activities`
     );
 
     return response.data;
   } catch (error) {
     console.error("Error getting activities: ", error);
-    return [];
+    return null;
   }
 };
 

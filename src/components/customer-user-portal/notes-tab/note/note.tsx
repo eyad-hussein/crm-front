@@ -50,7 +50,8 @@ export default function Note({ note, setNotes }: NoteProps) {
           <div className='ml-10 flex'>
             <img src={noteIcon.src} className='w-6' alt='note icon' />
             <span className='ml-5'>
-              Notes <span className='text-gray-500'>created by</span> User
+              Notes <span className='text-gray-500'>created by</span>{" "}
+              {`${note.note?.user?.first_name} ${note.note?.user?.last_name}`}
             </span>
           </div>
         </div>

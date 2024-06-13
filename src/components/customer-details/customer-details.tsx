@@ -2,11 +2,11 @@ import CustomerUserPortal from "../customer-user-portal/customer-user-portal";
 import CustomerStatus from "../customer-status/customer-status";
 import HorizontalDivider from "../horizontal-divider/horizontal-divider";
 import RecentActivity from "../recent-activity/recent-activity";
-import { IActivity, ICustomer } from "@/types";
+import { IActivities, ICustomer } from "@/types";
 
 interface CustomerDetailsProps {
   customer: ICustomer;
-  activities: IActivity[] | null;
+  activities: IActivities | null;
 }
 
 export default function CustomerDetails({

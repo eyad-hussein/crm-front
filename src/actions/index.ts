@@ -21,6 +21,8 @@ import getExtensions from "./extension/getExtensions";
 import getStatesByCountryId from "./state/getStatesByCountryId";
 import getCitiesByStateId from "./city/getCitiesByStateId";
 import sortCustomers from "./customer/sortCustomers";
+import createTask from "./task/createTask";
+import createNote from "./note/createNote";
 
 export {
   addCustomer,
@@ -46,4 +48,6 @@ export {
   getStatesByCountryId,
   getCitiesByStateId,
   sortCustomers,
+  createTask,
+  createNote,
 };

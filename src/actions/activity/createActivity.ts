@@ -4,7 +4,7 @@ import { ActivityType } from "@/enums";
 import axios from "axios";
 
 const createActivity = async (
-  customerId: number,
+  customerId: number | string,
   activityType: ActivityType,
   formData: FormData
 ) => {

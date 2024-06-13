@@ -1,12 +1,14 @@
 "use client";
 import { useState } from "react";
 import CustomerUserPortalNavBar from "./customer-user-portal-nav-bar/customer-user-portal-nav-bar";
-import { ActivityType, CustomerUserPortalTabType } from "@/enums";
+import { CustomerUserPortalTabType } from "@/enums";
 import NotesTab from "./notes-tab/notes-tab";
-import { IActivity } from "@/types";
+import { IActivities } from "@/types";
+import MeetingsTab from "./meetings-tab/meetings-tab";
+import TasksTab from "./tasks-tab/tasks-tab";
 
 interface CustomerUserPortalProps {
-  activities: IActivity[] | null;
+  activities: IActivities | null;
   customerId: number;
 }
 
@@ -27,16 +29,16 @@ export default function CustomerUserPortal({
           <div>Activity Timeline</div>
         )}
         {currentTab === CustomerUserPortalTabType.NOTES && (
-          <NotesTab
-            initialNotes={activities?.filter(
-              (activity) => activity.activity_type == ActivityType.NOTE
-            )}
+          <NotesTab initialNotes={activities?.notes} customerId={customerId} />
+        )}
+        {currentTab === CustomerUserPortalTabType.TASKS && (
+          <TasksTab initialTasks={activities?.tasks} customerId={customerId} />
+        )}
+        {currentTab === CustomerUserPortalTabType.MEETINGS && (
+          <MeetingsTab
+            initialMeetings={activities?.meetings}
             customerId={customerId}
           />
-        )}
-        {currentTab === CustomerUserPortalTabType.TASKS && <div>Tasks</div>}
-        {currentTab === CustomerUserPortalTabType.MEETINGS && (
-          <div>Meetings</div>
         )}
         {currentTab === CustomerUserPortalTabType.DEALS && <div>Deals</div>}
       </div>

@@ -4,7 +4,7 @@ import HorizontalDivider from "@/components/horizontal-divider/horizontal-divide
 import Note from "./note/note";
 import { IActivity } from "@/types";
 import { FormEvent, useState } from "react";
-import { createActivity } from "@/actions";
+import { createNote } from "@/actions";
 import { ActivityType } from "@/enums";
 
 interface NotesTabProps {
@@ -27,11 +27,7 @@ export default function NotesTab({ initialNotes, customerId }: NotesTabProps) {
 
     const formData = new FormData(e.currentTarget as HTMLFormElement);
 
-    const newNote = await createActivity(
-      customerId,
-      ActivityType.NOTE,
-      formData
-    );
+    const newNote = await createNote(customerId, 1, formData);
     setNotes((notes) => [newNote, ...(notes || [])]);
     setNewTitle((title) => "");
     setNewDescription((description) => "");

@@ -14,5 +14,3 @@ export const logger: Logger =
         },
         level: "debug",
       });
-
-logger.info({ env: "message" }, "Logger initialized");
