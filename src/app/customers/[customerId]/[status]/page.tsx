@@ -1,6 +1,6 @@
 import CustomerDetails from "@/components/customer-details/customer-details";
 import CustomerProfileHeader from "@/components/customer-profile-header/customer-profile-header";
-import { getActivities, getCustomer } from "@/actions";
+import { getActivitesByCustomerId, getCustomer } from "@/actions";
 import CancelButtonSmall from "@/components/buttons/cancel-button/cancel-button-small";
 import HorizontalDivider from "@/components/horizontal-divider/horizontal-divider";
 interface CustomerProfileProps {
@@ -15,7 +15,7 @@ export default async function CustomerProfilePage({
   try {
     const [customer, activities] = await Promise.all([
       getCustomer(params.customerId),
-      getActivities(params.customerId),
+      getActivitesByCustomerId(params.customerId),
     ]);
 
     if (!customer) {

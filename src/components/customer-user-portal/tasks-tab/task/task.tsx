@@ -38,7 +38,7 @@ export default function Task({ task }: TaskProps) {
             <img src={taskIcon.src} className='w-6' alt='note icon' />
             <span className='ml-5'>
               Task <span className='text-gray-500'>created by </span>
-              {`${task.task?.user?.first_name} ${task.task?.user?.last_name}`}
+              {`${task.user?.first_name} ${task.user?.last_name}`}
             </span>
           </div>
 

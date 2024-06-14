@@ -22,7 +22,10 @@ export default function CustomerUserPortal({
 
   return (
     <section className='flex flex-col w-[70%] py-10 mr-5 border border-slate-200'>
-      <CustomerUserPortalNavBar setCurrentTab={setCurrentTab} />
+      <CustomerUserPortalNavBar
+        currentTab={currentTab}
+        setCurrentTab={setCurrentTab}
+      />
 
       <div className='p-10'>
         {currentTab === CustomerUserPortalTabType.ACTIVITY_TIMELINE && (

@@ -10,7 +10,7 @@ export default function Meeting({ meeting }: MeetingProps) {
       <div className='nav'>
         <span>
           Created by
-          {`${meeting.meeting?.user?.first_name} ${meeting.meeting?.user?.last_name}`}
+          {`${meeting.user?.first_name} ${meeting.user?.last_name}`}
         </span>
         <span>Due {meeting.meeting?.meeting_date}</span>
       </div>

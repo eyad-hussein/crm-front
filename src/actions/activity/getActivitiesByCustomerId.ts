@@ -3,7 +3,7 @@ import { logger } from "@/lib/logger";
 import { IActivities } from "@/types";
 import axios from "axios";
 
-const getActivities = async (
+const getActivitesByCustomerId = async (
   customerId: string
 ): Promise<IActivities | null> => {
   try {
@@ -19,4 +19,4 @@ const getActivities = async (
   }
 };
 
-export default getActivities;
+export default getActivitesByCustomerId;

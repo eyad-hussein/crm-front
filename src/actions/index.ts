@@ -14,7 +14,8 @@ import getProspects from "./prospect/getProspects";
 import searchForCustomer from "./customer/searchForCustomer";
 import filterCustomers from "./customer/filterCustomers";
 import deleteActivity from "./activity/deleteActivity";
-import getActivities from "./activity/getActivities";
+import getActivitesByCustomerId from "./activity/getActivitiesByCustomerId";
+import getActivitesByUserId from "./activity/getActivitiesByUserId";
 import patchActivity from "./activity/patchActivity";
 import createActivity from "./activity/createActivity";
 import getExtensions from "./extension/getExtensions";
@@ -23,6 +24,7 @@ import getCitiesByStateId from "./city/getCitiesByStateId";
 import sortCustomers from "./customer/sortCustomers";
 import createTask from "./task/createTask";
 import createNote from "./note/createNote";
+import getUserById from "./user/getUserById";
 
 export {
   addCustomer,
@@ -41,7 +43,8 @@ export {
   searchForCustomer,
   filterCustomers,
   deleteActivity,
-  getActivities,
+  getActivitesByCustomerId,
+  getActivitesByUserId,
   patchActivity,
   createActivity,
   getExtensions,
@@ -50,4 +53,5 @@ export {
   sortCustomers,
   createTask,
   createNote,
+  getUserById,
 };

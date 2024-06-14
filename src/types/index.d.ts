@@ -16,6 +16,7 @@ import IExtension from "./extension";
 import IAddress from "./address";
 import { Pair } from "./pair";
 import IActivities from "./activities";
+import IDepartment from "./department";
 
 export {
   IIndustry,
@@ -36,4 +37,5 @@ export {
   IAddress,
   Pair,
   IActivities,
+  IDepartment,
 };

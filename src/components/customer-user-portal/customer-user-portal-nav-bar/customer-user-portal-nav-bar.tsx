@@ -1,10 +1,12 @@
 import { CustomerUserPortalTabType } from "@/enums";
 
 interface CustomerUserPortalNavBarProps {
+  currentTab: CustomerUserPortalTabType;
   setCurrentTab: (tab: CustomerUserPortalTabType) => void;
 }
 
 export default function CustomerUserPortalNavBar({
+  currentTab,
   setCurrentTab,
 }: CustomerUserPortalNavBarProps) {
   return (
@@ -13,7 +15,9 @@ export default function CustomerUserPortalNavBar({
         <button
           key={tab}
           onClick={() => setCurrentTab(tab)}
-          className='w-full py-2 border-b border-slate-200'>
+          className={`w-full py-2 border-b border-slate-200 ${
+            tab === currentTab ? "text-blue-500" : ""
+          }`}>
           {tab}
         </button>
       ))}
