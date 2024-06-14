@@ -1,3 +1,5 @@
+import IPhoneNumber from "./phone-number";
+
 export default interface IUser {
   id: number;
   first_name: string | null;
@@ -9,4 +11,5 @@ export default interface IUser {
   manager_id: number | null;
   created_at: Date;
   updated_at: Date;
+  user_phone_numbers: IPhoneNumber[] | [];
 }

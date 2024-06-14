@@ -6,7 +6,7 @@ import { CustomerSectionNavigationButtonType } from "./customer-section-nav-butt
 import { CustomerUserPortalTabType } from "./customer-user-portal-tab-type";
 import { ActivityType } from "./activity-type";
 import { SortingCategoryType } from "./sorting-category-type";
-
+import { UserProfileNavItemType } from "./user-profile-nav-item-type";
 export {
   CustomerStatusType,
   LeadSourceType,
@@ -16,4 +16,5 @@ export {
   CustomerUserPortalTabType,
   ActivityType,
   SortingCategoryType,
+  UserProfileNavItemType,
 };

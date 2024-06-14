@@ -1,6 +1,6 @@
 import Image from "next/image";
 import CustomersNavBarGroup from "./customers-nav-bar-group/customers-nav-bar-group";
-import UserProfile from "../user-profile/user-profile";
+import UserProfile from "../shared/user-profile/user-profile";
 import alphaLogoBig from "@/public/assets/images/logos/alpha-creative-logo-blue.png";
 import profilePic from "@/public/assets/images/images/IMG_0003.jpg";
 

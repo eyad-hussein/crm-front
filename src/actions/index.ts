@@ -23,6 +23,7 @@ import getCitiesByStateId from "./city/getCitiesByStateId";
 import sortCustomers from "./customer/sortCustomers";
 import createTask from "./task/createTask";
 import createNote from "./note/createNote";
+import getUserById from "./user/getUserById";
 
 export {
   addCustomer,
@@ -50,4 +51,5 @@ export {
   sortCustomers,
   createTask,
   createNote,
+  getUserById,
 };
