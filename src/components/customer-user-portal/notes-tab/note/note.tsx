@@ -51,7 +51,7 @@ export default function Note({ note, setNotes }: NoteProps) {
             <img src={noteIcon.src} className='w-6' alt='note icon' />
             <span className='ml-5'>
               Notes <span className='text-gray-500'>created by</span>{" "}
-              {`${note.note?.user?.first_name} ${note.note?.user?.last_name}`}
+              {`${note.user?.first_name} ${note.user?.last_name}`}
             </span>
           </div>
         </div>

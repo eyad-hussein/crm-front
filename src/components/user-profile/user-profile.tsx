@@ -1,14 +1,13 @@
 import profilePicture from "@/public/assets/images/images/IMG_0003.jpg";
 import { IUser } from "@/types";
 import Image from "next/image";
-import UserProfileNav from "./user-profile-nav/user-profile-nav";
 import UserProfileSections from "./user-profile-sections/user-profile-sections";
 
 export default function UserProfile({ user }: { user: IUser | null }) {
   return (
-    <div className='flex justify-center items-center'>
-      <div>
-        <div className='flex flex-col'>
+    <div className='flex justify-center'>
+      <div className='w-1/4'>
+        <div className='flex flex-col items-center'>
           <div className='border border-primary rounded-full overflow-clip w-60 h-60'>
             <Image src={profilePicture} alt='profile picture' />
           </div>
@@ -20,7 +19,7 @@ export default function UserProfile({ user }: { user: IUser | null }) {
         </div>
       </div>
 
-      <UserProfileSections />
+      <UserProfileSections user={user} />
     </div>
   );
 }

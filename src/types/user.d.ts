@@ -1,3 +1,4 @@
+import IDepartment from "./department";
 import IPhoneNumber from "./phone-number";
 
 export default interface IUser {
@@ -8,8 +9,12 @@ export default interface IUser {
   password: string | null;
   title: string | null;
   email: string | null;
+  gender: string | null;
   manager_id: number | null;
+  department_id: number | null;
   created_at: Date;
   updated_at: Date;
   user_phone_numbers: IPhoneNumber[] | [];
+  department: IDepartment;
+  manager: IUser | null;
 }

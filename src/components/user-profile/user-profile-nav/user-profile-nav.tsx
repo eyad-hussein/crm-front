@@ -14,7 +14,9 @@ export default function UserProfileNav({
       {Object.values(UserProfileNavItemType).map((item, index) => (
         <button
           key={index}
-          className='w-full py-2 border-b border-slate-200'
+          className={`w-full py-2 border-b border-slate-200 ${
+            item === currentTab ? "text-primary" : ""
+          }`}
           onClick={() => setCurrentTab(item)}>
           {item}
         </button>

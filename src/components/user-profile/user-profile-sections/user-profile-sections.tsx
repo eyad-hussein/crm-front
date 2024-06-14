@@ -5,17 +5,22 @@ import { UserProfileNavItemType } from "@/enums";
 import Overview from "../overview/overview";
 import PersonalInformation from "../personal-information/personal-information";
 import WorkSchedule from "../work-schedule/work-schedule";
+import { IUser } from "@/types";
 
-export default function UserProfileSections() {
+export default function UserProfileSections({ user }: { user: IUser | null }) {
   const [currentTab, setCurrentTab] = useState(UserProfileNavItemType.OVERVIEW);
 
+  if (!user) {
+    return null;
+  }
+
   return (
-    <div className='flex-1'>
+    <div className='flex-1 px-10'>
       <UserProfileNav currentTab={currentTab} setCurrentTab={setCurrentTab} />
       {currentTab === UserProfileNavItemType.OVERVIEW ? (
-        <Overview />
+        <Overview userId={user.id} />
       ) : currentTab === UserProfileNavItemType.PERSONAL_INFORMATION ? (
-        <PersonalInformation />
+        <PersonalInformation user={user} />
       ) : currentTab === UserProfileNavItemType.WORK_SCHEDULE ? (
         <WorkSchedule />
       ) : null}
