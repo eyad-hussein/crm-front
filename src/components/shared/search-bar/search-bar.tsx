@@ -1,11 +1,33 @@
+"use client";
+import { useEffect, useState } from "react";
 import searchIcon from "@/public/assets/images/icons/search.png";
 
-export default function SearchBar() {
+interface SearchBarProps {
+  placeholder: string;
+  handleSearch: (query: string) => void;
+}
+
+export default function SearchBar({
+  placeholder,
+  handleSearch,
+}: SearchBarProps) {
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    handleSearch(query);
+  }, [query]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setQuery(value);
+  };
+
   return (
     <div className='relative w-full'>
       <input
+        onChange={handleInputChange}
         type='text'
-        placeholder='Search Teams'
+        placeholder={placeholder}
         className='w-full px-4 py-3 border rounded-md outline-none'
       />
       <button className='absolute right-3 top-1/2 transform -translate-y-1/2'>

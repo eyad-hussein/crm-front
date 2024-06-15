@@ -6,7 +6,7 @@ import EditButton from "../buttons/edit-button/edit-button";
 import {
   deleteCustomer,
   getCustomersBasedOnStatus,
-  searchForCustomer,
+  searchForCustomers,
 } from "@/actions";
 interface CustomersListProps {
   initialCustomers: ICustomerStatus[] | null;
@@ -37,7 +37,7 @@ export default function CustomersList({
   const fetchCustomers = useCallback(async () => {
     if (searchParams?.query) {
       setCustomers(
-        await searchForCustomer(
+        await searchForCustomers(
           status,
           searchParams.query,
           searchParams.searchFilters

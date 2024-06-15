@@ -1,5 +1,5 @@
 import CustomersNavBar from "@/components/customers-nav-bar/customers-nav-bar";
-import UsersNavBar from "@/components/users-nav-bar/users-nav-bar";
+import UsersNavBar from "@/components/users/users-nav-bar/users-nav-bar";
 
 export default function CustomersRoute({
   children,

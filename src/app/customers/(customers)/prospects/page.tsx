@@ -1,5 +1,5 @@
 import CustomerSection from "@/components/customers-section/customers-section";
-import { getCustomersBasedOnStatus, searchForCustomer } from "@/actions";
+import { getCustomersBasedOnStatus, searchForCustomers } from "@/actions";
 import { Suspense } from "react";
 
 export default async function ProspectsPage({
@@ -10,7 +10,7 @@ export default async function ProspectsPage({
   };
 }) {
   const response = await (searchParams?.query
-    ? searchForCustomer("prospects", searchParams.query)
+    ? searchForCustomers("prospects", searchParams.query)
     : getCustomersBasedOnStatus("prospects"));
 
   return (

@@ -20,9 +20,7 @@ export default function SearchButton({ src }: SearchButtonProps) {
     setIsExpanded(!isExpanded);
   };
 
-  // Ensure that the query and searchFilters are passed to handleSearch function
   const handleSearch = (queryValue: string, searchFilters: string[]) => {
-    // Verify that the selected filters and query are correctly captured
     logger.info({ queryValue }, "queryValue:");
     logger.info({ searchFilters }, "searchFilters:");
 
@@ -33,10 +31,8 @@ export default function SearchButton({ src }: SearchButtonProps) {
     if (searchFilters.length > 0) {
       params.set("searchFilters", searchFilters.join(","));
     }
-    // Log the constructed URL for debugging
     logger.info({ params: params.toString() }, "Constructed URL:");
 
-    // Pass params.toString() to the replace function
     replace(`${pathname}?${params.toString()}`);
   };
 

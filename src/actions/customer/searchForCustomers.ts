@@ -2,7 +2,7 @@
 import { logger } from "@/lib/logger";
 import { ICustomerStatus } from "@/types";
 import axios from "axios";
-const searchForCustomer = async (
+const searchForCustomers = async (
   status: string,
   query?: string,
   searchFilters?: string
@@ -25,4 +25,4 @@ const searchForCustomer = async (
   }
 };
 
-export default searchForCustomer;
+export default searchForCustomers;

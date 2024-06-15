@@ -1,4 +1,8 @@
-import InvertedButton from "@/components/buttons/inverted-button/inverted-button";
+"use client";
+import { logger } from "@/lib/logger";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+
 import TransparentButton from "@/components/buttons/transparent-button/transparent-button";
 import HorizontalDivider from "@/components/horizontal-divider/horizontal-divider";
 import SearchBar from "@/components/shared/search-bar/search-bar";
@@ -6,11 +10,49 @@ import addIcon from "@/public/assets/images/icons/add.png";
 import filterIcon from "@/public/assets/images/icons/filter.png";
 import userProfileIcon from "@/public/assets/images/icons/profile-user.png";
 import { IUser } from "@/types";
-
+import InvertedButton from "@/components/buttons/inverted-button/inverted-button";
+import UsersList from "@/components/users/users-list/users-list";
+import { searchForUsers } from "@/actions";
 interface UsersProps {
-  users: IUser[] | [];
+  initialUsers: IUser[] | [];
 }
-export default function Users({ users }: UsersProps) {
+export default function Users({ initialUsers }: UsersProps) {
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const [users, setUsers] = useState<IUser[] | []>(initialUsers);
+
+  const handleUserSearch = async (queryValue: string) => {
+    logger.info({ queryValue });
+
+    const params = new URLSearchParams();
+    if (queryValue) {
+      params.set("query", queryValue);
+    }
+
+    logger.info({ message: "Constructed URL:", params: params.toString() });
+
+    replace(`${pathname}?${params.toString()}`);
+
+    const users = await searchForUsers(queryValue);
+    if (users) {
+      setUsers((prev) => users);
+    }
+  };
+
+  const handleTeamSearch = async (queryValue: string) => {
+    logger.info({ queryValue });
+
+    const params = new URLSearchParams();
+    if (queryValue) {
+      params.set("query", queryValue);
+    }
+
+    logger.info({ message: "Constructed URL:", params: params.toString() });
+
+    replace(`${pathname}?${params.toString()}`);
+  };
+
   return (
     <div className='flex justify-between py-5 px-12 h-screen'>
       <div className='flex flex-col items-start w-1/5 mr-10'>
@@ -25,7 +67,10 @@ export default function Users({ users }: UsersProps) {
               <TransparentButton text='Filter Team' src={filterIcon.src} />
             </div>
           </div>
-          <SearchBar />
+          <SearchBar
+            placeholder='Search Teams'
+            handleSearch={handleTeamSearch}
+          />
           <HorizontalDivider classes='w-full my-4' />
         </div>
 
@@ -36,16 +81,18 @@ export default function Users({ users }: UsersProps) {
             className='w-5 h-5'
           />
           <span className='ml-3 text-gray-500'>All users</span>
-          <span className='ml-auto text-gray-500'>1</span>
+          <span className='ml-auto text-gray-500'>{users.length}</span>
         </div>
       </div>
-
       <div className='flex flex-col flex-1'>
         <div className='h-1/5'>
           <h1 className='text-4xl mb-2'>All Users</h1>
           <nav className='flex justify-between items-center'>
             <div className='w-1/5'>
-              <SearchBar />
+              <SearchBar
+                placeholder='Search by name or email'
+                handleSearch={handleUserSearch}
+              />
             </div>
             <div className='flex items-center'>
               <div className='mr-4'>
@@ -55,26 +102,7 @@ export default function Users({ users }: UsersProps) {
             </div>
           </nav>
         </div>
-        <table className='w-11/12 text-left'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Title</th>
-              <th>Department</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr>
-                <td>{`${user.first_name} ${user.last_name}`}</td>
-                <td>{user.email}</td>
-                <td>{user.title}</td>
-                <td>{user.department.department_name}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <UsersList users={users} />
       </div>
     </div>
   );
