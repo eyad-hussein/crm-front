@@ -1,12 +1,10 @@
 "use server";
 import IUser from "@/types/user";
-import axios, { AxiosResponse } from "axios";
-
+import axiosInstance from "@/lib/axios";
+import { AxiosResponse } from "axios";
 const getUsers = async (): Promise<IUser[] | null> => {
   try {
-    const response: AxiosResponse = await axios.get<IUser[]>(
-      "http://localhost:5000/users"
-    );
+    const response: AxiosResponse = await axiosInstance.get<IUser[]>("/users");
     return response.data;
   } catch (error) {
     console.error(error);
