@@ -1,12 +1,16 @@
 interface FormSelectProps {
   name: string;
   children: React.ReactNode;
+  defaultValue?: string | number;
+  value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export default function FormSelect({
   name,
   children,
+  defaultValue = "",
+  value = "",
   onChange,
 }: FormSelectProps) {
   return (

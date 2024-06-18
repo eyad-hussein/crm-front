@@ -15,7 +15,7 @@ export default function UserProfile({ user }: { user: IUser | null }) {
           <h2>{user?.email}</h2>
           <h2>{`${user?.user_phone_numbers[0].extension.extension} ${user?.user_phone_numbers[0].phone_number}`}</h2>
           <h2>{user?.title}</h2>
-          <h2>{user?.user_name}</h2>
+          <h2>{user?.username}</h2>
         </div>
       </div>
 

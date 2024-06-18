@@ -27,7 +27,7 @@ export default function NotesTab({ initialNotes, customerId }: NotesTabProps) {
 
     const formData = new FormData(e.currentTarget as HTMLFormElement);
 
-    const newNote = await createNote(customerId, 1, formData);
+    const newNote = await createNote(customerId, 4, formData);
     setNotes((notes) => [newNote, ...(notes || [])]);
     setNewTitle((title) => "");
     setNewDescription((description) => "");

@@ -1,9 +1,12 @@
+"use client";
 interface FormInputProps {
   name: string;
   type: string;
   placeholder: string;
   className?: string;
   value?: string | number;
+  defaultValue?: string | number;
+  onChange?: (e: any) => void;
 }
 
 export default function FormInput({
@@ -11,7 +14,9 @@ export default function FormInput({
   type,
   placeholder,
   value = "",
+  defaultValue = "",
   className = "",
+  onChange,
 }: FormInputProps): JSX.Element {
   return (
     <input
@@ -20,7 +25,9 @@ export default function FormInput({
       id={name}
       type={type}
       placeholder={placeholder}
-      defaultValue={value}
+      defaultValue={defaultValue}
+      value={value}
+      onChange={onChange}
     />
   );
 }
