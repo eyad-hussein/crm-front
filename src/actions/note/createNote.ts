@@ -23,6 +23,7 @@ const createNote = async (
       `${process.env.BACKEND_API_URL}/customers/${customerId}/activities`,
       data
     );
+
     return response.data;
   } catch (error) {
     console.error("Error creating activity", error);
