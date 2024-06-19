@@ -4,7 +4,6 @@ interface FormInputProps {
   type: string;
   placeholder: string;
   className?: string;
-  value?: string | number;
   defaultValue?: string | number;
   onChange?: (e: any) => void;
 }
@@ -13,7 +12,6 @@ export default function FormInput({
   name,
   type,
   placeholder,
-  value = "",
   defaultValue = "",
   className = "",
   onChange,
@@ -26,7 +24,6 @@ export default function FormInput({
       type={type}
       placeholder={placeholder}
       defaultValue={defaultValue}
-      value={value}
       onChange={onChange}
     />
   );
