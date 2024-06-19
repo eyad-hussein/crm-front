@@ -27,6 +27,7 @@ import createTask from "./task/createTask";
 import createNote from "./note/createNote";
 import getUserById from "./user/getUserById";
 import login from "./auth/login";
+import register from "./auth/register";
 
 export {
   addCustomer,
@@ -58,4 +59,5 @@ export {
   getUserById,
   searchForUsers,
   login,
+  register,
 };
