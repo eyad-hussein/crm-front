@@ -1,5 +1,5 @@
 import CustomerSection from "@/components/customers-section/customers-section";
-import { getCustomersBasedOnStatus, searchForCustomer } from "@/actions";
+import { getCustomersBasedOnStatus, searchForCustomers } from "@/actions";
 import { Suspense } from "react";
 import { logger } from "@/lib/logger";
 export default async function ContactsPage({
@@ -12,7 +12,7 @@ export default async function ContactsPage({
 }) {
   logger.info({ searchParams }, "searchParams:");
   const response = await (searchParams?.query
-    ? searchForCustomer(
+    ? searchForCustomers(
         "contacts",
         searchParams.query,
         searchParams.searchFilters

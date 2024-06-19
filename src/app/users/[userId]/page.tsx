@@ -1,5 +1,5 @@
 import { getUserById } from "@/actions";
-import UserProfile from "@/components/user-profile/user-profile";
+import UserProfile from "@/components/users/user-profile/user-profile";
 
 export default async function UserProfilePage({
   params,

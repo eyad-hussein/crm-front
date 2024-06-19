@@ -1,12 +1,15 @@
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useCallback } from "react";
+
+import { parseDate } from "@/lib/utils";
+
 import { ICustomerStatus } from "@/types";
 import EditButton from "../buttons/edit-button/edit-button";
 import {
   deleteCustomer,
   getCustomersBasedOnStatus,
-  searchForCustomer,
+  searchForCustomers,
 } from "@/actions";
 interface CustomersListProps {
   initialCustomers: ICustomerStatus[] | null;
@@ -37,7 +40,7 @@ export default function CustomersList({
   const fetchCustomers = useCallback(async () => {
     if (searchParams?.query) {
       setCustomers(
-        await searchForCustomer(
+        await searchForCustomers(
           status,
           searchParams.query,
           searchParams.searchFilters
@@ -76,14 +79,11 @@ export default function CustomersList({
   };
 
   return (
-    <div className='overflow-x-scroll pb-10'>
+    <div className='overflow-x-scroll pb-10 text-left'>
       {selected.length > 0 && (
         <button onClick={handleOnClickOnDelete}>Delete</button>
       )}
-      <table
-        style={{
-          width: "120%",
-        }}>
+      <table className='w-[120%]'>
         <thead>
           <tr className=''>
             <th></th>
@@ -94,7 +94,7 @@ export default function CustomersList({
             <th>Lead Source</th>
             <th>Phone</th>
             <th>Email</th>
-            <th>Category</th>
+            <th>Service</th>
             <th>Assignee</th>
             <th>Discription</th>
           </tr>
@@ -104,7 +104,7 @@ export default function CustomersList({
             customers.map((customer: ICustomerStatus) => {
               const { customer: customerData } = customer;
               return (
-                <tr key={customer.id}>
+                <tr key={customer.id} className='mb-10 '>
                   <td>
                     <input
                       type='checkbox'
@@ -123,7 +123,7 @@ export default function CustomersList({
                     onClick={() =>
                       handleOnClick(customerData.id, customerData.status)
                     }>
-                    {customerData.follow_up_date?.toString()}
+                    {parseDate(customerData.follow_up_date ?? "")}
                   </td>
                   <td
                     onClick={() =>
@@ -169,6 +169,7 @@ export default function CustomersList({
                       handleOnClick(customerData.id, customerData.status)
                     }>{`${customerData.user.first_name} ${customerData.user.last_name}`}</td>
                   <td
+                    className='break-words max-w-96 '
                     onClick={() =>
                       handleOnClick(customerData.id, customerData.status)
                     }>

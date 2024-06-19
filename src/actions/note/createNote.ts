@@ -10,21 +10,20 @@ const createNote = async (
 ) => {
   try {
     logger.info({ customerId }, "Creating activity...");
-    const data: { [key: string]: any } = {
-      title: formData.get("title"),
-      description: formData.get("description"),
-      customer_id: customerId,
-      activity_type: ActivityType.NOTE,
-    };
 
-    data[ActivityType.NOTE] = {
-      user_id: currentUserId,
-    };
+    const data: { [key: string]: any } = Object.fromEntries(formData);
+    data.activity_type = ActivityType.NOTE;
+    data.user_id = currentUserId as string;
+    data.user_id.toString();
+    data[ActivityType.NOTE] = {};
+
+    logger.info({ data }, "Data to be sent to the server");
 
     const response = await axios.post(
       `${process.env.BACKEND_API_URL}/customers/${customerId}/activities`,
       data
     );
+
     return response.data;
   } catch (error) {
     console.error("Error creating activity", error);

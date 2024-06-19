@@ -13,12 +13,11 @@ const createTask = async (
     const data: { [key: string]: any } = {
       title: formData.get("title"),
       description: formData.get("description"),
-      customer_id: customerId,
       activity_type: ActivityType.TASK,
+      user_id: currentUserId as string,
     };
 
     data[ActivityType.TASK] = {
-      user_id: currentUserId,
       priority: formData.get("priority"),
     };
 

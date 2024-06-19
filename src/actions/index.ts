@@ -11,7 +11,8 @@ import getStates from "./state/getStates";
 import deleteCustomer from "./customer/deleteCustomer";
 import getCustomersBasedOnStatus from "./customer/getCustomersBasedOnStatus";
 import getProspects from "./prospect/getProspects";
-import searchForCustomer from "./customer/searchForCustomer";
+import searchForCustomers from "./customer/searchForCustomers";
+import searchForUsers from "./user/searchForUsers";
 import filterCustomers from "./customer/filterCustomers";
 import deleteActivity from "./activity/deleteActivity";
 import getActivitesByCustomerId from "./activity/getActivitiesByCustomerId";
@@ -25,6 +26,8 @@ import sortCustomers from "./customer/sortCustomers";
 import createTask from "./task/createTask";
 import createNote from "./note/createNote";
 import getUserById from "./user/getUserById";
+import login from "./auth/login";
+import register from "./auth/register";
 
 export {
   addCustomer,
@@ -40,7 +43,7 @@ export {
   deleteCustomer,
   getCustomersBasedOnStatus,
   getProspects,
-  searchForCustomer,
+  searchForCustomers,
   filterCustomers,
   deleteActivity,
   getActivitesByCustomerId,
@@ -54,4 +57,7 @@ export {
   createTask,
   createNote,
   getUserById,
+  searchForUsers,
+  login,
+  register,
 };
