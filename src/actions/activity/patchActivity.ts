@@ -1,16 +1,12 @@
 "use server";
+import axiosInstance from "@/lib/axios";
 import { logger } from "@/lib/logger";
-import axios from "axios";
 
-const patchActivity = async (
-  customerId: number,
-  activityId: number,
-  formData: FormData
-) => {
+const patchActivity = async (activityId: number, formData: FormData) => {
   try {
     logger.info({ activityId }, "Patching activity: ");
-    const response = await axios.patch(
-      `${process.env.BACKEND_API_URL}/customers/${customerId}/activities/${activityId}`,
+    const response = await axiosInstance.patch(
+      `/activities/${activityId}`,
       Object.fromEntries(formData)
     );
 

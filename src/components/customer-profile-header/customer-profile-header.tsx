@@ -4,6 +4,7 @@ import locationIcon from "@/public/assets/images/icons/location.png";
 import telephoneIcon from "@/public/assets/images/icons/telephone.png";
 import HorizontalDivider from "../horizontal-divider/horizontal-divider";
 import { ICustomer } from "@/types";
+import { parseDate } from "@/lib/parser";
 
 interface CustomerProfileHeaderProps {
   customer: ICustomer | null;
@@ -47,7 +48,7 @@ export default function CustomerProfileHeader({
       </div>
 
       <HorizontalDivider />
-      <div className='grid grid-cols-7 divide-x py-5'>
+      <div className='grid grid-cols-5 divide-x py-5'>
         <div className='pl-5'>
           <span>Email</span>
           <span className='block'>{customer.email}</span>
@@ -59,14 +60,14 @@ export default function CustomerProfileHeader({
 
         <div className='pl-5'>
           <span>Created On</span>
-          <span className='block'>{customer.createdAt.toString()}</span>
+          <span className='block'>{parseDate(customer.createdAt)}</span>
         </div>
         <div className='pl-5'>
           <span>Tags</span>
           <span className='block'>Tags</span>
         </div>
         <div className='pl-5'>
-          <span>Update By</span>
+          <span>Created By</span>
           <span className='block'>
             {`${customer.user.first_name ?? ""} ${
               customer.user.last_name ?? ""

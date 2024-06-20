@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const convertToCamelCase = (str: string): string => {
   return str.replace(/([-_][a-z])/gi, ($1) => {
     return $1.toUpperCase().replace("-", "").replace("_", "");
@@ -13,4 +15,12 @@ export const convertSnakeToPascalWithSpaces = (
     .join(" ");
 
   return pascalWithSpaces;
+};
+
+export const parseDate = (
+  date: string | Date,
+  includeTime: boolean = false
+): string => {
+  if (includeTime) return moment(date).format("MMMM Do YYYY, h:mm a");
+  return moment(date).format("MMMM Do YYYY");
 };

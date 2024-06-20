@@ -19,6 +19,7 @@ const createTask = async (
 
     data[ActivityType.TASK] = {
       priority: formData.get("priority"),
+      due_date: formData.get("due_date"),
     };
 
     const response = await axios.post(

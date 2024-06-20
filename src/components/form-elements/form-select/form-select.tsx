@@ -1,16 +1,15 @@
+"use client";
 interface FormSelectProps {
   name: string;
   children: React.ReactNode;
-  defaultValue?: string | number;
-  value?: string | number;
+  defaultValue?: string;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export default function FormSelect({
   name,
   children,
-  defaultValue = "",
-  value = "",
+  defaultValue,
   onChange,
 }: FormSelectProps) {
   return (
@@ -19,6 +18,7 @@ export default function FormSelect({
         className='block appearance-none w-full bg-white border text-gray-700 py-3 px-4 pr-8 rounded leading-tight border-gray-500'
         name={name}
         id={name}
+        defaultValue={defaultValue}
         onChange={onChange}>
         {children}
       </select>

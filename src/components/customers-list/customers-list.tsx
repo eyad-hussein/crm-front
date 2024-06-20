@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useCallback } from "react";
 
-import { parseDate } from "@/lib/utils";
+import { parseDate } from "@/lib/parser";
 
 import { ICustomerStatus } from "@/types";
 import EditButton from "../buttons/edit-button/edit-button";

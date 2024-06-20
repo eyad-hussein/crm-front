@@ -17,7 +17,6 @@ const searchForCustomers = async (
       `${process.env.BACKEND_API_URL}/customers/search?query=${query}&status=${status}&searchFilters=${searchFilters}`
     );
 
-    logger.info({ response: response.data }, "customers");
     return response.data;
   } catch (error) {
     logger.error(error);

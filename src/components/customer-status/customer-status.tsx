@@ -3,6 +3,7 @@ import { logger } from "@/lib/logger";
 import { useState } from "react";
 import { patchCustomerStatus } from "@/actions";
 import { CustomerStatusType } from "@/enums";
+import { convertSnakeToPascalWithSpaces } from "@/lib/parser";
 
 interface CustomerStatusProps {
   customerId: number | undefined;
@@ -41,7 +42,7 @@ export default function CustomerStatus({
             style={{
               clipPath: arrowClipPath,
             }}>
-            {status}
+            {convertSnakeToPascalWithSpaces(status)}
           </button>
         );
       })}
