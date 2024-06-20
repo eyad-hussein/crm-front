@@ -65,7 +65,7 @@ export default function SearchButton({ src }: SearchButtonProps) {
             type='text'
             placeholder='Search...'
           />
-          <div className='absolute bg-white top-8 w-full border border-black px-10'>
+          <div className='absolute  z-50 bg-white top-8 w-full border border-black px-10'>
             <CheckList
               selectedColumns={selectedColumns}
               setSelectedColumns={setSelectedColumns}

@@ -118,7 +118,7 @@ export default function CustomersList({
                       onChange={handleSelect}
                     />
                   </td>
-                  <td className='relative'>
+                  <td className='relative break-words max-w-52'>
                     <span>{`${customerData.name}`}</span>
                     <span className='absolute right-3'>
                       <EditButton customerId={customerData.id} />
