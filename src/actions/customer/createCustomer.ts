@@ -1,8 +1,12 @@
 "use server";
 import { CustomerStatusType } from "@/enums";
+import { logger } from "@/lib/logger";
 import axios from "axios";
 
-const createCustomer = async (formData: FormData) => {
+const createCustomer = async (
+  selectedServices: number[],
+  formData: FormData
+) => {
   try {
     if (
       !Object.values(CustomerStatusType).includes(
@@ -35,6 +39,9 @@ const createCustomer = async (formData: FormData) => {
       },
     ];
 
+    data["services"] = selectedServices;
+
+    logger;
     const response = await axios.post(
       `${process.env.BACKEND_API_URL}/customers`,
       data

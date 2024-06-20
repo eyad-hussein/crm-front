@@ -1,3 +1,4 @@
+"use client";
 import { logger } from "@/lib/logger";
 import { FormEvent } from "react";
 import SortMenuItem from "./sort-menu-item/sort-menu-item";
@@ -19,13 +20,23 @@ export default function SortMenu({ handleSort }: SortMenuProps) {
     logger.info(formData);
     handleSort(formData);
   };
+
+  const handleOnDelete = (id: number) => {
+    logger.info({ message: "Deleting sort category", id });
+
+    setSortingCategoriesNumber(
+      (sortingCategoriesNumber) => sortingCategoriesNumber - 1
+    );
+
+    logger.info({ message: "Sort category deleted", id });
+  };
   const [sortingCategoriesNumber, setSortingCategoriesNumber] = useState(1);
   return (
     <form
       onSubmit={(e) => handleClick(e)}
       className='flex flex-col list-none bg-white border border-black w-[20rem] py-4 px-5'>
       {[...Array(sortingCategoriesNumber)].map((_, index) => (
-        <SortMenuItem key={index} id={index} />
+        <SortMenuItem key={index} id={index} handleOnDelete={handleOnDelete} />
       ))}
       <div className='flex justify-between mt-5'>
         <TransparentButton

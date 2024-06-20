@@ -10,13 +10,22 @@ import {
   getCitiesByStateId,
   getExtensions,
   getStatesByCountryId,
+  getServices,
 } from "@/actions";
 import { useEffect, useState } from "react";
 import CancelButtonBig from "@/components/buttons/cancel-button/cancel-button-big";
 import FormLabel from "@/components/form-elements/form-label/form-label";
 import FormSelect from "@/components/form-elements/form-select/form-select";
 import FormInput from "@/components/form-elements/form-input/form-input";
-import { ICity, ICountry, IExtension, IIndustry, IState, IUser } from "@/types";
+import {
+  ICity,
+  ICountry,
+  IExtension,
+  IIndustry,
+  IService,
+  IState,
+  IUser,
+} from "@/types";
 
 export default function CreateCustomerFormPage() {
   const [users, setUsers] = useState<IUser[] | null>([]);
@@ -25,19 +34,39 @@ export default function CreateCustomerFormPage() {
   const [cities, setCities] = useState<ICity[] | null>([]);
   const [states, setStates] = useState<IState[] | null>([]);
   const [extensions, setExtensions] = useState<IExtension[] | null>([]);
+  const [services, setServices] = useState<IService[] | null>([]);
+  const [selectedServices, setSelectedServices] = useState<number[]>([]);
+
+  const handleOnServiceClick = (id: number) => {
+    setSelectedServices((selectedServices) => {
+      if (selectedServices.includes(id)) {
+        return selectedServices.filter((serviceId) => serviceId !== id);
+      } else {
+        return [...selectedServices, id];
+      }
+    });
+  };
 
   useEffect(() => {
     const initialize = async () => {
-      const [users, countries, industries, extensions] = await Promise.all([
+      const [
+        initialUsers,
+        initialCountries,
+        initialIndustries,
+        initialExtensions,
+        initialServices,
+      ] = await Promise.all([
         getUsers(),
         getCountries(),
         getIndustries(),
         getExtensions(),
+        getServices(),
       ]);
-      setUsers(users);
-      setCountries(countries);
-      setIndustries(industries);
-      setExtensions(extensions);
+      setUsers(initialUsers);
+      setCountries(initialCountries);
+      setIndustries(initialIndustries);
+      setExtensions(initialExtensions);
+      setServices(initialServices);
     };
 
     logger.info("Initializing");
@@ -63,8 +92,10 @@ export default function CreateCustomerFormPage() {
 
   return (
     <div>
-      <h1 className='mb-6 text-3xl'>Add a new Customer</h1>
-      <form className='w-full flex justify-between' action={createCustomer}>
+      <h1 className='mb-6 text-3xl'>Add a New Customer</h1>
+      <form
+        className='w-full flex justify-between'
+        action={createCustomer.bind(null, selectedServices)}>
         <div className='w-1/2 mr-12'>
           <div className='flex flex-wrap -mx-3 mb-3'>
             <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
@@ -153,6 +184,25 @@ export default function CreateCustomerFormPage() {
               ))}
             </FormSelect>
           </div>
+
+          <div className='w-full mb-6'>
+            <FormLabel className='mb-2' htmlFor='services' content='Services' />
+            {services?.map((service) => (
+              <label
+                className='block'
+                htmlFor={service.id.toString()}
+                key={service.id}>
+                <input
+                  type='checkbox'
+                  name={service.id.toString()}
+                  id={service.id.toString()}
+                  value={service.id}
+                  onClick={() => handleOnServiceClick(service.id)}
+                />
+                {service.service_name}
+              </label>
+            ))}
+          </div>
         </div>
 
         <div className='w-1/2 ml-12'>
@@ -235,7 +285,7 @@ export default function CreateCustomerFormPage() {
             <FormLabel
               className='mb-2'
               htmlFor='address_line_1'
-              content='address_line_1'
+              content='Address Line 1'
             />
             <FormInput name='address_line_1' type='text' placeholder='90210' />
           </div>
@@ -243,7 +293,7 @@ export default function CreateCustomerFormPage() {
             <FormLabel
               className='mb-2'
               htmlFor='address_line_2'
-              content='address_line_2'
+              content='Address Line 2'
             />
             <FormInput name='address_line_2' type='text' placeholder='90210' />
           </div>
@@ -291,6 +341,21 @@ export default function CreateCustomerFormPage() {
               })}
             </FormSelect>
           </div>
+
+          <div className='w-full mb-6'>
+            <FormLabel
+              className='mb-2'
+              htmlFor='follow_up_date'
+              content='Follow Up Date'
+            />
+            <input
+              type='date'
+              name='follow_up_date'
+              id='follow_up_date'
+              className='outline-none w-full'
+            />
+          </div>
+
           <div className='w-full flex justify-between'>
             <div className='ml-auto mr-5'>
               <CancelButtonBig />

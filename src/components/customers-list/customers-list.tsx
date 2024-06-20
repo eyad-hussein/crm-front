@@ -1,3 +1,4 @@
+"use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useCallback } from "react";
@@ -11,6 +12,7 @@ import {
   getCustomersBasedOnStatus,
   searchForCustomers,
 } from "@/actions";
+
 interface CustomersListProps {
   initialCustomers: ICustomerStatus[] | null;
   status: string;
@@ -85,7 +87,7 @@ export default function CustomersList({
       )}
       <table className='w-[120%]'>
         <thead>
-          <tr className=''>
+          <tr>
             <th></th>
             <th>Name</th>
             <th>Follow-Up</th>
@@ -104,7 +106,9 @@ export default function CustomersList({
             customers.map((customer: ICustomerStatus) => {
               const { customer: customerData } = customer;
               return (
-                <tr key={customer.id} className='mb-10 '>
+                <tr
+                  key={customer.id}
+                  className='border border-b-black h-20 max-h-24'>
                   <td>
                     <input
                       type='checkbox'
@@ -114,9 +118,11 @@ export default function CustomersList({
                       onChange={handleSelect}
                     />
                   </td>
-                  <td>
-                    {`${customerData.name}`}
-                    <EditButton customerId={customerData.id} />
+                  <td className='relative'>
+                    <span>{`${customerData.name}`}</span>
+                    <span className='absolute right-3'>
+                      <EditButton customerId={customerData.id} />
+                    </span>
                   </td>
 
                   <td

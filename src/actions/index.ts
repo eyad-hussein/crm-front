@@ -28,6 +28,7 @@ import createNote from "./note/createNote";
 import getUserById from "./user/getUserById";
 import login from "./auth/login";
 import register from "./auth/register";
+import getServices from "./service/getServices";
 
 export {
   addCustomer,
@@ -60,4 +61,5 @@ export {
   searchForUsers,
   login,
   register,
+  getServices,
 };
