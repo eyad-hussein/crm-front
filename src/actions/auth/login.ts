@@ -9,9 +9,15 @@ const login = async (formData: FormData) => {
 
   try {
     const response = await axiosInstance.post(`/auth/login`, data);
+
     cookies().set("token", response.data.token, {
       maxAge: 60 * 60 * 24 * 7,
     });
+    cookies().set("user", JSON.stringify(response.data.user), {
+      maxAge: 60 * 60 * 24 * 7,
+    });
+
+    logger.warn(cookies().get("user"));
     return response.data;
   } catch (error) {
     console.error(error);

@@ -7,11 +7,11 @@ const searchForCustomers = async (
   query?: string,
   searchFilters?: string
 ) => {
-  logger.info({ query }, "searching for customer query:");
-  logger.info({ searchFilters, status }, "searching for customer params");
-
   try {
-    logger.info("searching for customer");
+    if (!query) return null;
+
+    logger.info({ query }, "searching for customer query:");
+    logger.info({ searchFilters, status }, "searching for customer params");
 
     const response = await axios.get<ICustomerStatus[]>(
       `${process.env.BACKEND_API_URL}/customers/search?query=${query}&status=${status}&searchFilters=${searchFilters}`
