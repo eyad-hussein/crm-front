@@ -13,7 +13,10 @@ export default function UserProfile({ user }: { user: IUser | null }) {
           </div>
           <h1 className='text-3xl text-center'>{`${user?.first_name} ${user?.last_name}`}</h1>
           <h2>{user?.email}</h2>
-          <h2>{`${user?.user_phone_numbers[0].extension.extension} ${user?.user_phone_numbers[0].phone_number}`}</h2>
+          <h2>
+            {user?.user_phone_numbers.length &&
+              `${user?.user_phone_numbers[0].extension.extension} ${user?.user_phone_numbers[0].phone_number}`}
+          </h2>
           <h2>{user?.title}</h2>
           <h2>{user?.username}</h2>
         </div>
