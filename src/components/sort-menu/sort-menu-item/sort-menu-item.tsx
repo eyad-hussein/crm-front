@@ -4,23 +4,32 @@ import FormSelect from "@/components/form-elements/form-select/form-select";
 import { SortingCategoryType } from "@/enums";
 import { Pair } from "@/types";
 import { logger } from "@/lib/logger";
+import { convertSnakeToPascalWithSpaces } from "@/lib/parser";
+import deleteIcon from "@/public/assets/images/icons/delete.png";
+import Image from "next/image";
 
 interface SortMenuItemProps {
   id: number;
+  handleOnDelete: (id: number) => void;
 }
 
-export default function SortMenuItem({ id }: SortMenuItemProps) {
+export default function SortMenuItem({
+  id,
+  handleOnDelete,
+}: SortMenuItemProps) {
   const buildSortingOption = (category: SortingCategoryType): string[] => {
     let options = [];
 
-    switch (category) {
-      case SortingCategoryType.NAME:
-      case SortingCategoryType.EMAIL:
-        options = ["Ascending", "Descending"];
-        break;
-      default:
-        options = ["DefaultOption", "Descending"];
-    }
+    // switch (category) {
+    //   case SortingCategoryType.NAME:
+    //   case SortingCategoryType.EMAIL:
+    //     options = ["Ascending", "Descending"];
+    //     break;
+    //   default:
+    //     options = ["DefaultOption", "Descending"];
+    // }
+
+    options = ["Ascending", "Descending"];
 
     return options;
   };
@@ -49,7 +58,7 @@ export default function SortMenuItem({ id }: SortMenuItemProps) {
           onChange={handleCategoryChange}>
           {Object.values(SortingCategoryType).map((option, index) => (
             <option key={index} value={option}>
-              {option}
+              {convertSnakeToPascalWithSpaces(option)}
             </option>
           ))}
         </FormSelect>
@@ -63,6 +72,10 @@ export default function SortMenuItem({ id }: SortMenuItemProps) {
           ))}
         </FormSelect>
       </div>
+
+      <button onClick={() => handleOnDelete(id)} className='ml-2'>
+        <Image className='w-12' src={deleteIcon} alt='Delete sort option' />
+      </button>
     </div>
   );
 }

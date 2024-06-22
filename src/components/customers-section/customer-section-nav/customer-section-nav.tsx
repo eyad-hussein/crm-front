@@ -22,7 +22,7 @@ export default function CustomerSectionNav({
 }: CustomerSectionNavProps) {
   return (
     <nav className='flex flex-col min-h-36 w-full mt-10 mb-5'>
-      <div>Main table</div>
+      {/* <div>Main table</div> */}
       <div className='flex w-full mt-auto mb-8'>
         <FlatButton href='/customers/create' text='New Customer' />
 

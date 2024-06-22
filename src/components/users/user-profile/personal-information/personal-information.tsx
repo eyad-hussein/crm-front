@@ -19,7 +19,7 @@ export default function PersonalInformation({ user }: { user: IUser }) {
           <span>
             {user.manager !== null
               ? `${user.manager?.first_name} ${user.manager?.last_name}`
-              : ""}
+              : "No One"}
           </span>
         </div>
         <div className='flex justify-between'>

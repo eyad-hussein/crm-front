@@ -4,6 +4,7 @@ import getUsers from "./user/getUsers";
 import getIndustries from "./industry/getIndustries";
 import createCustomer from "./customer/createCustomer";
 import putCustomer from "./customer/putCustomer";
+import patchCustomer from "./customer/patchCustomer";
 import getCustomer from "./customer/getCustomer";
 import patchCustomerStatus from "./customer/patchCustomerStatus";
 import getCities from "./city/getCities";
@@ -28,6 +29,8 @@ import createNote from "./note/createNote";
 import getUserById from "./user/getUserById";
 import login from "./auth/login";
 import register from "./auth/register";
+import getServices from "./service/getServices";
+import deleteTask from "./task/deleteTask";
 
 export {
   addCustomer,
@@ -36,6 +39,7 @@ export {
   getIndustries,
   createCustomer,
   putCustomer,
+  patchCustomer,
   getCustomer,
   patchCustomerStatus,
   getCities,
@@ -60,4 +64,6 @@ export {
   searchForUsers,
   login,
   register,
+  getServices,
+  deleteTask,
 };

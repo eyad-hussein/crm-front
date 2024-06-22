@@ -8,14 +8,12 @@ import { createNote } from "@/actions";
 import { ActivityType } from "@/enums";
 
 interface NotesTabProps {
-  initialNotes: IActivity[] | null | undefined;
+  initialNotes: IActivity[] | undefined;
   customerId: number;
 }
 
 export default function NotesTab({ initialNotes, customerId }: NotesTabProps) {
-  const [notes, setNotes] = useState<IActivity[] | null | undefined>(
-    initialNotes
-  );
+  const [notes, setNotes] = useState<IActivity[]>(initialNotes ?? []);
   const [newTitle, setNewTitle] = useState<string | null>(null);
   const [newDescription, setNewDescription] = useState<string | null>(null);
 
@@ -32,6 +30,7 @@ export default function NotesTab({ initialNotes, customerId }: NotesTabProps) {
     setNewTitle((title) => "");
     setNewDescription((description) => "");
   };
+
   return (
     <div className='flex flex-col'>
       <form className='flex flex-col' onSubmit={(e) => handleOnSubmit(e)}>

@@ -26,10 +26,10 @@ export default interface ICustomer {
   industry_id: number;
   user_id: number;
   image_id: number | null;
-  customer_phone_numbers: ICustomerPhoneNumber[];
+  customer_phone_numbers: IPhoneNumber[];
   user: IUser;
   industry: IIndustry;
   services: IService[];
   activities: IActivity[];
-  addresses: IAddress[];
+  addresses: IAddress[] | [];
 }

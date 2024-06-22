@@ -13,7 +13,7 @@ import { IActivity } from "@/types";
 
 interface NoteProps {
   note: IActivity;
-  setNotes?: any;
+  setNotes: React.Dispatch<React.SetStateAction<IActivity[]>>;
 }
 
 export default function Note({ note, setNotes }: NoteProps) {
@@ -61,7 +61,7 @@ export default function Note({ note, setNotes }: NoteProps) {
       {isClose && (
         <form
           className='flex flex-col w-full'
-          action={patchActivity.bind(null, note.customer_id, note.id)}>
+          action={patchActivity.bind(null, note.id)}>
           <div className='flex min-h-40'>
             <div className='w-10 h-10 bg-lime-200 rounded-full border border-lime-300 overflow-clip mt-1 object-contain'>
               <Image

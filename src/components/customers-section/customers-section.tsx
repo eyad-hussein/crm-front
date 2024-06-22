@@ -44,7 +44,7 @@ export default function CustomerSection({
     }
   };
   return (
-    <section className='flex flex-col w-full'>
+    <section className='flex flex-col w-full h-full'>
       <CustomerSectionHeader title={title} />
       <CustomerSectionNav handlers={{ handleFilter, handleSort }} />
       <CustomersList

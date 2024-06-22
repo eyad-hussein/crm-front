@@ -1,19 +1,17 @@
 "use server";
-import { CustomerStatusType } from "@/enums";
-import { logger } from "@/lib/logger";
-import axios from "axios";
 
-const createCustomer = async (
+import { ICustomer } from "@/types";
+import axiosInstance from "@/lib/axios";
+import { logger } from "@/lib/logger";
+
+const patchCustomer = async (
   selectedServices: number[],
+  customer: ICustomer,
   formData: FormData
-) => {
+): Promise<void | null> => {
+  console.log(formData);
   try {
-    if (
-      !Object.values(CustomerStatusType).includes(
-        formData.get("status") as CustomerStatusType
-      )
-    )
-      throw Error("Invalid status");
+    logger.info("updating customer");
 
     const data: { [key: string]: any } = {};
 
@@ -23,6 +21,7 @@ const createCustomer = async (
 
     data["customer_phone_numbers"] = [
       {
+        id: customer.customer_phone_numbers[0].id,
         phone_number: data["customer_phone_numbers"],
         extension_id: data["extension_id"],
       },
@@ -30,6 +29,7 @@ const createCustomer = async (
 
     data["addresses"] = [
       {
+        id: customer.addresses[0].id,
         address_line_1: data["address_line_1"],
         address_line_2: data["address_line_2"],
         city_id: data["city_id"],
@@ -41,15 +41,16 @@ const createCustomer = async (
 
     data["services"] = selectedServices;
 
-    logger;
-    const response = await axios.post(
-      `${process.env.BACKEND_API_URL}/customers`,
+    const response = await axiosInstance.patch(
+      `/customers/${customer.id}`,
       data
     );
+
     return response.data;
   } catch (error) {
-    console.error(error);
+    logger.error("error updating customer", error);
+    return null;
   }
 };
 
-export default createCustomer;
+export default patchCustomer;
