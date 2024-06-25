@@ -3,10 +3,13 @@ import CustomersNavBarGroup from "./customers-nav-bar-group/customers-nav-bar-gr
 import UserProfile from "../shared/user-profile/user-profile";
 import alphaLogoBig from "@/public/assets/images/logos/alpha-creative-logo-blue.png";
 import profilePic from "@/public/assets/images/images/IMG_0003.jpg";
+import { retrieveCurrentLoggedInUserFromCookies } from "@/lib/cookies-handler";
+import { IUser } from "@/types";
 
 export default function CustomersNavBar() {
+  const user: IUser = retrieveCurrentLoggedInUserFromCookies(true);
   return (
-    <nav className='flex flex-col justify-between bg-slate-50 w-[12%]'>
+    <nav className='flex flex-col justify-between bg-slate-50 max-w-[14%]'>
       <div className='flex justify-center items-stretch w-full min-h-40 px-8'>
         <Image
           src={alphaLogoBig}
@@ -17,7 +20,11 @@ export default function CustomersNavBar() {
 
       <CustomersNavBarGroup />
 
-      <UserProfile icon={profilePic} name='Eyad' email='eyad@gmail.com' />
+      <UserProfile
+        icon={profilePic}
+        name={`${user.first_name} ${user.last_name}`}
+        email={user.email}
+      />
     </nav>
   );
 }

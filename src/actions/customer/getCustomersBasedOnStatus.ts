@@ -1,14 +1,17 @@
 "use server";
 
 import { logger } from "@/lib/logger";
-import axios from "axios";
+import axiosInstance from "@/lib/axios";
+import { cookies } from "next/headers";
 
 const getCustomersBasedOnStatus = async (status: string) => {
   try {
     logger.info("getting customers based on status");
-    const response = await axios.get(
-      `${process.env.BACKEND_API_URL}/customers/${status}`
-    );
+    const response = await axiosInstance.get(`/customers/${status}`, {
+      headers: {
+        Authorization: `Bearer ${cookies().get("token")?.value}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);

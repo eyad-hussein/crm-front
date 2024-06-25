@@ -12,7 +12,7 @@ export default function UserProfile({ name, email, icon }: UserProfileProps) {
     <div className='flex justify-center items-center max-h-12 max-w-full mb-4'>
       <Avatar icon={icon} />
 
-      <div className='flex flex-col'>
+      <div className='flex flex-col ml-2'>
         <span>{name}</span>
         <span>{email}</span>
       </div>

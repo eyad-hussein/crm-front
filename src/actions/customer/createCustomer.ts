@@ -1,6 +1,7 @@
 "use server";
 import { CustomerStatusType } from "@/enums";
 import { logger } from "@/lib/logger";
+import { getTokenFromCookies } from "@/lib/token-handler";
 import axios from "axios";
 
 const createCustomer = async (
@@ -44,7 +45,12 @@ const createCustomer = async (
     logger;
     const response = await axios.post(
       `${process.env.BACKEND_API_URL}/customers`,
-      data
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${getTokenFromCookies()}`,
+        },
+      }
     );
     return response.data;
   } catch (error) {
