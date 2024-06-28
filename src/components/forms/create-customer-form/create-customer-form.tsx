@@ -17,7 +17,7 @@ import {
   ICountry,
   IExtension,
   IIndustry,
-  IService,
+  IPackage,
   IState,
   IUser,
 } from "@/types";
@@ -28,27 +28,15 @@ interface CreateCustomerFormProps {
     countries: ICountry[] | null;
     industries: IIndustry[] | null;
     extensions: IExtension[] | null;
-    services: IService[] | null;
+    packages: IPackage[] | null;
   };
 }
 
 export default function CreateCustomerForm({
-  data: { users, countries, industries, extensions, services },
+  data: { users, countries, industries, extensions, packages },
 }: CreateCustomerFormProps) {
   const [cities, setCities] = useState<ICity[] | null>([]);
   const [states, setStates] = useState<IState[] | null>([]);
-
-  const [selectedServices, setSelectedServices] = useState<number[]>([]);
-
-  const handleOnServiceClick = (id: number) => {
-    setSelectedServices((selectedServices) => {
-      if (selectedServices.includes(id)) {
-        return selectedServices.filter((serviceId) => serviceId !== id);
-      } else {
-        return [...selectedServices, id];
-      }
-    });
-  };
 
   const handleCountryChange = async (
     e: React.ChangeEvent<HTMLSelectElement>
@@ -72,7 +60,7 @@ export default function CreateCustomerForm({
       <h1 className='mb-6 text-3xl'>Add a New Customer</h1>
       <form
         className='w-full flex justify-between'
-        action={createCustomer.bind(null, selectedServices)}>
+        action={createCustomer.bind(null)}>
         <div className='w-1/2 mr-12'>
           <div className='flex flex-wrap -mx-3 mb-3'>
             <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
@@ -163,22 +151,18 @@ export default function CreateCustomerForm({
           </div>
 
           <div className='w-full mb-6'>
-            <FormLabel className='mb-2' htmlFor='services' content='Services' />
-            {services?.map((service) => (
-              <label
-                className='block'
-                htmlFor={service.id.toString()}
-                key={service.id}>
-                <input
-                  type='checkbox'
-                  name={service.id.toString()}
-                  id={service.id.toString()}
-                  value={service.id}
-                  onClick={() => handleOnServiceClick(service.id)}
-                />
-                {service.service_name}
-              </label>
-            ))}
+            <FormLabel
+              className='mb-2'
+              htmlFor='package_id'
+              content='Packages'
+            />
+            <FormSelect name='package_id'>
+              {packages?.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.package_name}
+                </option>
+              ))}
+            </FormSelect>
           </div>
         </div>
 

@@ -10,6 +10,7 @@ import IPostalCode from "./postal-code";
 import IActivity from "./activity";
 import IAddress from "./address";
 import IIndustry from "./industry";
+import IPackage from "./package";
 
 export default interface ICustomer {
   id: number;
@@ -25,6 +26,7 @@ export default interface ICustomer {
   updatedAt: Date;
   industry_id: number;
   user_id: number;
+  package_id: number | null;
   image_id: number | null;
   customer_phone_numbers: IPhoneNumber[];
   user: IUser;
@@ -32,4 +34,5 @@ export default interface ICustomer {
   services: IService[];
   activities: IActivity[];
   addresses: IAddress[] | [];
+  package: IPackage | null;
 }

@@ -31,6 +31,7 @@ import login from "./auth/login";
 import register from "./auth/register";
 import getServices from "./service/getServices";
 import deleteTask from "./task/deleteTask";
+import getPackages from "./package/getPackages";
 
 export {
   addCustomer,
@@ -66,4 +67,5 @@ export {
   register,
   getServices,
   deleteTask,
+  getPackages,
 };

@@ -3,15 +3,25 @@ import CustomerProfileHeader from "@/components/customer-profile-header/customer
 import { getActivitesByCustomerId, getCustomer } from "@/actions";
 import CancelButtonSmall from "@/components/buttons/cancel-button/cancel-button-small";
 import HorizontalDivider from "@/components/horizontal-divider/horizontal-divider";
+import { CustomerStatusType } from "@/enums";
+
 interface CustomerProfileProps {
   params: {
     customerId: string;
+    status: string;
   };
 }
 
 export default async function CustomerProfilePage({
   params,
 }: CustomerProfileProps) {
+  if (
+    !Object.values(CustomerStatusType).includes(
+      params.status as CustomerStatusType
+    )
+  ) {
+    return <div>Invalid status</div>;
+  }
   try {
     const [customer, activities] = await Promise.all([
       getCustomer(params.customerId),
@@ -21,6 +31,7 @@ export default async function CustomerProfilePage({
     if (!customer) {
       throw new Error("Customer not found");
     }
+
     return (
       <section className='flex flex-col relative'>
         <div className='absolute top-0 right-0'>

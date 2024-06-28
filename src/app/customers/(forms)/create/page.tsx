@@ -3,18 +3,18 @@ import {
   getExtensions,
   getCountries,
   getIndustries,
-  getServices,
+  getPackages,
   getUsers,
 } from "@/actions";
 
 export default async function CreateCustomerFormPage() {
-  const [users, countries, industries, extensions, services] =
+  const [users, countries, industries, extensions, packages] =
     await Promise.all([
       getUsers(),
       getCountries(),
       getIndustries(),
       getExtensions(),
-      getServices(),
+      getPackages(),
     ]);
 
   return (
@@ -24,7 +24,7 @@ export default async function CreateCustomerFormPage() {
         countries: countries,
         industries: industries,
         extensions: extensions,
-        services: services,
+        packages: packages,
       }}
     />
   );

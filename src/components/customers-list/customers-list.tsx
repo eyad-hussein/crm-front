@@ -96,7 +96,7 @@ export default function CustomersList({
             <th>Lead Source</th>
             <th>Phone</th>
             <th>Email</th>
-            <th>Service</th>
+            <th>Package</th>
             <th>Assignee</th>
             <th>Discription</th>
           </tr>
@@ -167,8 +167,7 @@ export default function CustomersList({
                     onClick={() =>
                       handleOnClick(customerData.id, customerData.status)
                     }>
-                    {customerData.services.length &&
-                      customerData.services[0].service_name}
+                    {customerData.package?.package_name}
                   </td>
                   <td
                     onClick={() =>

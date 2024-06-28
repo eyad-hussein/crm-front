@@ -5,7 +5,7 @@ import {
   getIndustries,
   getCustomer,
   getExtensions,
-  getServices,
+  getPackages,
   getCitiesByStateId,
   getStatesByCountryId,
 } from "@/actions";
@@ -26,13 +26,13 @@ export default async function EditCustomerFormPage({
     return <div>Customer not found</div>;
   }
 
-  const [users, countries, industries, extensions, services] =
+  const [users, countries, industries, extensions, packages] =
     await Promise.all([
       getUsers(),
       getCountries(),
       getIndustries(),
       getExtensions(),
-      getServices(),
+      getPackages(),
     ]);
 
   const [cities, states] =
@@ -50,7 +50,7 @@ export default async function EditCustomerFormPage({
         countries: countries,
         industries: industries,
         extensions: extensions,
-        services: services,
+        packages: packages,
         initialCities: cities,
         initialStates: states,
       }}

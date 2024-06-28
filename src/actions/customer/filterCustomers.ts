@@ -3,6 +3,8 @@
 import { logger } from "@/lib/logger";
 import axios from "axios";
 import { ICustomerStatus } from "@/types";
+import { getTokenFromCookies } from "@/lib/token-handler";
+import { retrieveCurrentLoggedInUserFromCookies } from "@/lib/cookies-handler";
 
 const filterCustomers = async (status: string, formData: FormData) => {
   try {
@@ -18,7 +20,14 @@ const filterCustomers = async (status: string, formData: FormData) => {
 
     const response = await axios.post<ICustomerStatus[]>(
       `${process.env.BACKEND_API_URL}/customers/filter`,
-      data
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${getTokenFromCookies()}`,
+          User: retrieveCurrentLoggedInUserFromCookies(),
+        },
+        withCredentials: true,
+      }
     );
 
     logger.info({ message: "filtered customers", customers: response.data });

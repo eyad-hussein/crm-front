@@ -2,6 +2,9 @@
 import { logger } from "@/lib/logger";
 import { ActivityType } from "@/enums";
 import axios from "axios";
+import { getTokenFromCookies } from "@/lib/token-handler";
+import { retrieveCurrentLoggedInUserFromCookies } from "@/lib/cookies-handler";
+import { IActivity } from "@/types";
 
 const createNote = async (
   customerId: number | string,
@@ -19,9 +22,16 @@ const createNote = async (
 
     logger.info({ data }, "Data to be sent to the server");
 
-    const response = await axios.post(
+    const response = await axios.post<IActivity>(
       `${process.env.BACKEND_API_URL}/customers/${customerId}/activities`,
-      data
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${getTokenFromCookies()}`,
+          User: retrieveCurrentLoggedInUserFromCookies(),
+        },
+        withCredentials: true,
+      }
     );
 
     return response.data;
