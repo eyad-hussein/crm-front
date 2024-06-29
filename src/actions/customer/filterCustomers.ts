@@ -32,7 +32,7 @@ const filterCustomers = async (status: string, formData: FormData) => {
 
     return response.data;
   } catch (error) {
-    logger.info("error", error);
+    logger.error("error", error);
     return null;
   }
 };

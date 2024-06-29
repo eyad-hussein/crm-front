@@ -43,7 +43,6 @@ export default function SortMenuItem({
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newCategory = e.target.value as SortingCategoryType;
-    logger.info({ message: "Category changed", newCategory });
     setSelectedCategory({
       first: newCategory,
       second: buildSortingOption(newCategory),

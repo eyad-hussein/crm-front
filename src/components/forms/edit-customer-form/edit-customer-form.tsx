@@ -59,7 +59,6 @@ export default function EditCustomerForm({
   const handleCountryChange = async (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    logger.info("Handling country change");
     const countryId = e.target.value;
     const states = await getStatesByCountryId(countryId);
     setStates(states);
@@ -67,15 +66,12 @@ export default function EditCustomerForm({
   };
 
   const handleStateChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
-    logger.info("Handling state change");
     const stateId = e.target.value;
     const cities = await getCitiesByStateId(stateId);
     setCities(cities);
   };
 
   const handleOnSubmit = async (e: FormEvent) => {
-    logger.info("Handling submit new customer form");
-
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget as HTMLFormElement);

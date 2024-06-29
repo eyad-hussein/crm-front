@@ -13,9 +13,7 @@ const searchForCustomers = async (
   try {
     if (!query) return null;
 
-    logger.info({ query }, "searching for customer query:");
-    logger.info({ searchFilters, status }, "searching for customer params");
-
+    logger.info("Searching for customers");
     const response = await axiosInstance.get<ICustomerStatus[]>(
       `/customers/search?query=${query}&status=${status}&searchFilters=${searchFilters}`,
       {

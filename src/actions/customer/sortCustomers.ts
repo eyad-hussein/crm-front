@@ -61,10 +61,6 @@ const sortCustomers = async (
       return customers?.find((customer) => customer.customer.id === id);
     });
 
-    logger.info({
-      message: "sorted customers",
-      customers: response.data,
-    });
     return sortedCustomers;
   } catch (e) {
     logger.error(e);

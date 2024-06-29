@@ -18,7 +18,7 @@ const getCustomersBasedOnStatus = async (status: string) => {
     });
     return response.data;
   } catch (error) {
-    console.error(error);
+    logger.error(error);
   }
 };
 

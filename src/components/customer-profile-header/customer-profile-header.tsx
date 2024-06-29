@@ -27,7 +27,8 @@ export default function CustomerProfileHeader({
                 src={locationIcon.src}
                 alt='location'
               />
-              {customer.addresses[0].country.country_name}
+              {customer.addresses.length > 0 &&
+                customer.addresses[0].country.country_name}
             </span>
             <span className='flex items-center'>
               <img

@@ -141,7 +141,7 @@ export default function CustomersList({
                     onClick={() =>
                       handleOnClick(customerData.id, customerData.status)
                     }>
-                    {customerData.addresses &&
+                    {customerData.addresses.length > 0 &&
                       customerData.addresses[0].country.country_name}
                   </td>
                   <td

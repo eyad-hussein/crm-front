@@ -13,7 +13,6 @@ const patchCustomerStatus = async (
   logger.info({ customerId, customerStatus });
   const token = getTokenFromCookies();
   const user = retrieveCurrentLoggedInUserFromCookies();
-  logger.info({ token, user });
 
   try {
     const response = await axios.patch(

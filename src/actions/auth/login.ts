@@ -16,7 +16,6 @@ const login = async (formData: FormData) => {
       maxAge: 60 * 60 * 24 * 7,
     });
 
-    logger.warn(cookies().get("user"));
     return response.data;
   } catch (error) {
     console.error(error);

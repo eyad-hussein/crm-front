@@ -2,7 +2,7 @@ import CustomerSection from "@/components/customers-section/customers-section";
 import { getCustomersBasedOnStatus, searchForCustomers } from "@/actions";
 import { Suspense } from "react";
 import { logger } from "@/lib/logger";
-export default async function ProspectsPage({
+export default async function ClosuresPage({
   searchParams,
 }: {
   searchParams?: {
@@ -12,19 +12,19 @@ export default async function ProspectsPage({
 }) {
   const response = await (searchParams?.query
     ? searchForCustomers(
-        "prospects",
+        "closures",
         searchParams.query,
         searchParams.searchFilters
       )
-    : getCustomersBasedOnStatus("prospects"));
+    : getCustomersBasedOnStatus("closures"));
 
   return (
     <Suspense fallback={<div>Still loading</div>}>
       <CustomerSection
-        status='prospects'
+        status='closures'
         initialCustomers={response}
         searchParams={searchParams}
-        title='Prospects'
+        title='Closures'
       />
     </Suspense>
   );

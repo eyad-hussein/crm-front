@@ -32,6 +32,9 @@ import register from "./auth/register";
 import getServices from "./service/getServices";
 import deleteTask from "./task/deleteTask";
 import getPackages from "./package/getPackages";
+import getProposals from "./proposal/getProposals";
+import getFollowUps from "./follow-up/getFollowUps";
+import getClosures from "./closures/getProposals";
 
 export {
   addCustomer,
@@ -68,4 +71,7 @@ export {
   getServices,
   deleteTask,
   getPackages,
+  getClosures,
+  getFollowUps,
+  getProposals,
 };

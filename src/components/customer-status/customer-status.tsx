@@ -19,7 +19,6 @@ export default function CustomerStatus({
   >(oldCustomerStatus);
 
   const handleOnClick = async (status: CustomerStatusType) => {
-    logger.info("patching customer status, client side");
     setCurrentCustomerStatus(status);
     await patchCustomerStatus(customerId, status);
   };
