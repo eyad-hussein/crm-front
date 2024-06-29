@@ -3,6 +3,7 @@ import CustomerStatus from "../customer-status/customer-status";
 import HorizontalDivider from "../horizontal-divider/horizontal-divider";
 import RecentActivity from "../recent-activity/recent-activity";
 import { IActivities, ICustomer } from "@/types";
+import { CookiesProvider } from "next-client-cookies/server";
 
 interface CustomerDetailsProps {
   customer: ICustomer;
@@ -22,7 +23,12 @@ export default function CustomerDetails({
       />
       <HorizontalDivider />
       <div className='flex justify-between mt-8'>
-        <CustomerUserPortal customerId={customer.id} activities={activities} />
+        <CookiesProvider>
+          <CustomerUserPortal
+            customerId={customer.id}
+            activities={activities}
+          />
+        </CookiesProvider>
         <RecentActivity />
       </div>
     </div>

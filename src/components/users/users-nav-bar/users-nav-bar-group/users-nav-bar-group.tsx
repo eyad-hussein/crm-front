@@ -17,7 +17,7 @@ export default function UsersNavBarGroup() {
       <UsersNavBarIconLink icon={searchIcon} href='/' />
       <UsersNavBarIconLink icon={questionIcon} href='/' />
       <UsersNavBarIconLink icon={alphaSmallLogo} href='/' />
-      <UsersNavBarIconLink icon={userProfileIcon} href='/' />
+      <UsersNavBarIconLink icon={userProfileIcon} href='/users' />
     </ul>
   );
 }

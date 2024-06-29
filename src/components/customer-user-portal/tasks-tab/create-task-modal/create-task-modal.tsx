@@ -31,7 +31,7 @@ export default function CreateTaskModal({
 
     const formData = new FormData(e.currentTarget as HTMLFormElement);
 
-    const newTask = await createTask(customerId, 3, formData);
+    const newTask = await createTask(customerId, currentUserId, formData);
     setTasks((tasks) => [newTask, ...(tasks || [])]);
     setNewTitle((title) => "");
     setNewDescription((description) => "");

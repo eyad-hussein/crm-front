@@ -10,7 +10,7 @@ import {
   getStatesByCountryId,
   patchCustomer,
 } from "@/actions";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import CancelButtonBig from "@/components/buttons/cancel-button/cancel-button-big";
 import FormLabel from "@/components/form-elements/form-label/form-label";
 import FormSelect from "@/components/form-elements/form-select/form-select";
@@ -53,6 +53,8 @@ export default function EditCustomerForm({
 }: EditCustomerFormProps) {
   const [cities, setCities] = useState<ICity[] | null>(initialCities);
   const [states, setStates] = useState<IState[] | null>(initialStates);
+  const [isEdited, setIsEdited] = useState<boolean>(false);
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
 
   const handleCountryChange = async (
     e: React.ChangeEvent<HTMLSelectElement>
@@ -71,12 +73,26 @@ export default function EditCustomerForm({
     setCities(cities);
   };
 
+  const handleOnSubmit = async (e: FormEvent) => {
+    logger.info("Handling submit new customer form");
+
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const res = await patchCustomer(customer, formData);
+
+    setIsSubmit((prev) => true);
+    if (res) {
+      setIsEdited((prev) => true);
+    } else {
+      setIsEdited((prev) => false);
+    }
+  };
+
   return (
     <div>
       <h1 className='mb-6 text-3xl'>Edit Customer</h1>
-      <form
-        className='w-full flex justify-between'
-        action={patchCustomer.bind(null, customer)}>
+      <form className='w-full flex justify-between' onSubmit={handleOnSubmit}>
         <div className='w-1/2 mr-12'>
           <div className='flex flex-wrap -mx-3 mb-3'>
             <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
@@ -419,6 +435,13 @@ export default function EditCustomerForm({
           </div>
         </div>
       </form>
+
+      {isSubmit &&
+        (isEdited ? (
+          <div className='text-green-400'>Customer edited successfully</div>
+        ) : (
+          <div className='text-red-400'>Customer was not edited created</div>
+        ))}
     </div>
   );
 }

@@ -2,9 +2,9 @@ import Image from "next/image";
 import CustomersNavBarGroup from "./customers-nav-bar-group/customers-nav-bar-group";
 import UserProfile from "../shared/user-profile/user-profile";
 import alphaLogoBig from "@/public/assets/images/logos/alpha-creative-logo-blue.png";
-import profilePic from "@/public/assets/images/images/IMG_0003.jpg";
 import { retrieveCurrentLoggedInUserFromCookies } from "@/lib/cookies-handler";
 import { IUser } from "@/types";
+import { logger } from "@/lib/logger";
 
 export default function CustomersNavBar() {
   const user: IUser = retrieveCurrentLoggedInUserFromCookies(true);
@@ -21,9 +21,9 @@ export default function CustomersNavBar() {
       <CustomersNavBarGroup />
 
       <UserProfile
-        icon={profilePic}
         name={`${user.first_name} ${user.last_name}`}
         email={user.email}
+        currentUserId={user.id}
       />
     </nav>
   );

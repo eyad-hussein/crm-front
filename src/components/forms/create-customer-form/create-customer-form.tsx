@@ -7,7 +7,7 @@ import {
   getCitiesByStateId,
   getStatesByCountryId,
 } from "@/actions";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import CancelButtonBig from "@/components/buttons/cancel-button/cancel-button-big";
 import FormLabel from "@/components/form-elements/form-label/form-label";
 import FormSelect from "@/components/form-elements/form-select/form-select";
@@ -37,6 +37,8 @@ export default function CreateCustomerForm({
 }: CreateCustomerFormProps) {
   const [cities, setCities] = useState<ICity[] | null>([]);
   const [states, setStates] = useState<IState[] | null>([]);
+  const [isCreated, setIsCreated] = useState<boolean>(false);
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
 
   const handleCountryChange = async (
     e: React.ChangeEvent<HTMLSelectElement>
@@ -54,13 +56,25 @@ export default function CreateCustomerForm({
     const cities = await getCitiesByStateId(stateId);
     setCities(cities);
   };
+  const handleOnSubmit = async (e: FormEvent) => {
+    logger.info("Handling submit new customer form");
 
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const customer = await createCustomer(formData);
+
+    setIsSubmit((prev) => true);
+    if (customer) {
+      setIsCreated((prev) => true);
+    } else {
+      setIsCreated((prev) => false);
+    }
+  };
   return (
     <div>
       <h1 className='mb-6 text-3xl'>Add a New Customer</h1>
-      <form
-        className='w-full flex justify-between'
-        action={createCustomer.bind(null)}>
+      <form className='w-full flex justify-between' onSubmit={handleOnSubmit}>
         <div className='w-1/2 mr-12'>
           <div className='flex flex-wrap -mx-3 mb-3'>
             <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
@@ -329,6 +343,12 @@ export default function CreateCustomerForm({
           </div>
         </div>
       </form>
+      {isSubmit &&
+        (isCreated ? (
+          <div className='text-green-400'>Customer created successfully</div>
+        ) : (
+          <div className='text-red-400'>Customer was not created</div>
+        ))}
     </div>
   );
 }

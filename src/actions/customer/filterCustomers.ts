@@ -30,8 +30,6 @@ const filterCustomers = async (status: string, formData: FormData) => {
       }
     );
 
-    logger.info({ message: "filtered customers", customers: response.data });
-
     return response.data;
   } catch (error) {
     logger.info("error", error);

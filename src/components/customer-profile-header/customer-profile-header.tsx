@@ -1,5 +1,3 @@
-import Image from "next/image";
-import profilePicture from "@/public/assets/images/images/IMG_0003.jpg";
 import locationIcon from "@/public/assets/images/icons/location.png";
 import telephoneIcon from "@/public/assets/images/icons/telephone.png";
 import HorizontalDivider from "../horizontal-divider/horizontal-divider";
@@ -19,10 +17,6 @@ export default function CustomerProfileHeader({
   return (
     <header className='flex flex-col w-full items-stretch h-[10%]'>
       <div className='flex justify-start items-center h-1/2 py-5'>
-        <div className='max-h-20 max-w-20 rounded-full overflow-clip border-primary border-2'>
-          <img src={profilePicture.src} className='h-full' alt='back' />
-        </div>
-
         <div className='ml-2'>
           <h1 className='text-xl font-bold'>{`${customer.name}`}</h1>
 

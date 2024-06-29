@@ -10,7 +10,6 @@ const patchCustomer = async (
   customer: ICustomer,
   formData: FormData
 ): Promise<void | null> => {
-  console.log(formData);
   try {
     logger.info("updating customer");
 

@@ -7,10 +7,7 @@ export default function UserProfile({ user }: { user: IUser | null }) {
   return (
     <div className='flex justify-center'>
       <div className='w-1/4'>
-        <div className='flex flex-col items-center'>
-          <div className='border border-primary rounded-full overflow-clip w-60 h-60'>
-            <Image src={profilePicture} alt='profile picture' />
-          </div>
+        <div className='flex flex-col items-center mt-20'>
           <h1 className='text-3xl text-center'>{`${user?.first_name} ${user?.last_name}`}</h1>
           <h2>{user?.email}</h2>
           <h2>

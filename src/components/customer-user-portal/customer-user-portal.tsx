@@ -20,6 +20,10 @@ export default function CustomerUserPortal({
     CustomerUserPortalTabType.NOTES
   );
 
+  if (!activities) {
+    return <div>No Activities</div>;
+  }
+
   return (
     <section className='flex flex-col w-[70%] py-10 mr-5 border border-slate-200'>
       <CustomerUserPortalNavBar

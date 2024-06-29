@@ -15,7 +15,6 @@ const deleteCustomer = async (customerId: number) => {
       },
       withCredentials: true,
     });
-    logger.info({ response: response });
   } catch (error) {
     console.error(error);
   }

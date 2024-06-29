@@ -2,6 +2,8 @@
 import { logger } from "@/lib/logger";
 import { ActivityType } from "@/enums";
 import axios from "axios";
+import { getTokenFromCookies } from "@/lib/token-handler";
+import { retrieveCurrentLoggedInUserFromCookies } from "@/lib/cookies-handler";
 
 const createTask = async (
   customerId: number | string,
@@ -24,7 +26,14 @@ const createTask = async (
 
     const response = await axios.post(
       `${process.env.BACKEND_API_URL}/customers/${customerId}/activities`,
-      data
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${getTokenFromCookies()}`,
+          User: retrieveCurrentLoggedInUserFromCookies(),
+        },
+        withCredentials: true,
+      }
     );
     return response.data;
   } catch (error) {

@@ -8,8 +8,6 @@ export async function checkAuthentication(request: NextRequest) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
-  console.log(token);
-
   const response = await fetch(
     `${process.env.BACKEND_API_URL}/auth/verify-token`,
     {
