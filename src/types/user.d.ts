@@ -8,7 +8,7 @@ export default interface IUser {
   username: string | null;
   password: string | null;
   title: string | null;
-  email: string | null;
+  email: string;
   gender: string | null;
   manager_id: number | null;
   department_id: number | null;

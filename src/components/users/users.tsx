@@ -23,14 +23,10 @@ export default function Users({ initialUsers }: UsersProps) {
   const [users, setUsers] = useState<IUser[] | []>(initialUsers);
 
   const handleUserSearch = async (queryValue: string) => {
-    logger.info({ queryValue });
-
     const params = new URLSearchParams();
     if (queryValue) {
       params.set("query", queryValue);
     }
-
-    logger.info({ message: "Constructed URL:", params: params.toString() });
 
     replace(`${pathname}?${params.toString()}`);
 
@@ -41,14 +37,10 @@ export default function Users({ initialUsers }: UsersProps) {
   };
 
   const handleTeamSearch = async (queryValue: string) => {
-    logger.info({ queryValue });
-
     const params = new URLSearchParams();
     if (queryValue) {
       params.set("query", queryValue);
     }
-
-    logger.info({ message: "Constructed URL:", params: params.toString() });
 
     replace(`${pathname}?${params.toString()}`);
   };

@@ -10,7 +10,6 @@ export default async function ContactsPage({
     searchFilters?: string;
   };
 }) {
-  logger.info({ searchParams }, "searchParams:");
   const response = await (searchParams?.query
     ? searchForCustomers(
         "contacts",

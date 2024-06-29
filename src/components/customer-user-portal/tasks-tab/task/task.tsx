@@ -13,7 +13,7 @@ import { deleteActivity, patchActivity } from "@/actions";
 import FlatButton from "@/components/buttons/flat-button/flat-button";
 interface TaskProps {
   task: IActivity;
-  setTasks: React.Dispatch<React.SetStateAction<IActivity[]>>;
+  setTasks?: React.Dispatch<React.SetStateAction<IActivity[]>>;
 }
 
 export default function Task({ task, setTasks }: TaskProps) {
@@ -25,7 +25,8 @@ export default function Task({ task, setTasks }: TaskProps) {
 
   const handleOnDelete = async () => {
     await deleteActivity(task.id);
-    setTasks((tasks: IActivity[]) => tasks.filter((n) => n.id !== task.id));
+    if (setTasks)
+      setTasks((tasks: IActivity[]) => tasks.filter((n) => n.id !== task.id));
   };
 
   return (

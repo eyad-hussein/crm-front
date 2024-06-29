@@ -21,9 +21,6 @@ export default function SearchButton({ src }: SearchButtonProps) {
   };
 
   const handleSearch = (queryValue: string, searchFilters: string[]) => {
-    logger.info({ queryValue }, "queryValue:");
-    logger.info({ searchFilters }, "searchFilters:");
-
     const params = new URLSearchParams();
     if (queryValue) {
       params.set("query", queryValue);
@@ -31,7 +28,6 @@ export default function SearchButton({ src }: SearchButtonProps) {
     if (searchFilters.length > 0) {
       params.set("searchFilters", searchFilters.join(","));
     }
-    logger.info({ params: params.toString() }, "Constructed URL:");
 
     replace(`${pathname}?${params.toString()}`);
   };

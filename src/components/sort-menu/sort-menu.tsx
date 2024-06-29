@@ -17,18 +17,13 @@ export default function SortMenu({ handleSort }: SortMenuProps) {
 
     const formData = new FormData(e.currentTarget as HTMLFormElement);
 
-    logger.info(formData);
     handleSort(formData);
   };
 
   const handleOnDelete = (id: number) => {
-    logger.info({ message: "Deleting sort category", id });
-
     setSortingCategoriesNumber(
       (sortingCategoriesNumber) => sortingCategoriesNumber - 1
     );
-
-    logger.info({ message: "Sort category deleted", id });
   };
   const [sortingCategoriesNumber, setSortingCategoriesNumber] = useState(1);
   return (

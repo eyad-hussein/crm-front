@@ -28,7 +28,6 @@ export default function CustomerSection({
   );
 
   const handleFilter = async (formData: FormData) => {
-    logger.info({ formData }, "filtering customers, client side");
     const customers = await filterCustomers(status, formData);
 
     if (customers) {

@@ -1,13 +1,13 @@
 "use server";
 import { CustomerStatusType } from "@/enums";
+import { retrieveCurrentLoggedInUserFromCookies } from "@/lib/cookies-handler";
 import { logger } from "@/lib/logger";
+import { getTokenFromCookies } from "@/lib/token-handler";
 import axios from "axios";
 
-const createCustomer = async (
-  selectedServices: number[],
-  formData: FormData
-) => {
+const createCustomer = async (formData: FormData) => {
   try {
+    logger.info("creating customer");
     if (
       !Object.values(CustomerStatusType).includes(
         formData.get("status") as CustomerStatusType
@@ -39,12 +39,16 @@ const createCustomer = async (
       },
     ];
 
-    data["services"] = selectedServices;
-
-    logger;
     const response = await axios.post(
       `${process.env.BACKEND_API_URL}/customers`,
-      data
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${getTokenFromCookies()}`,
+          User: retrieveCurrentLoggedInUserFromCookies(),
+        },
+        withCredentials: true,
+      }
     );
     return response.data;
   } catch (error) {

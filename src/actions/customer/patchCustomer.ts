@@ -3,13 +3,13 @@
 import { ICustomer } from "@/types";
 import axiosInstance from "@/lib/axios";
 import { logger } from "@/lib/logger";
+import { getTokenFromCookies } from "@/lib/token-handler";
+import { retrieveCurrentLoggedInUserFromCookies } from "@/lib/cookies-handler";
 
 const patchCustomer = async (
-  selectedServices: number[],
   customer: ICustomer,
   formData: FormData
 ): Promise<void | null> => {
-  console.log(formData);
   try {
     logger.info("updating customer");
 
@@ -39,11 +39,16 @@ const patchCustomer = async (
       },
     ];
 
-    data["services"] = selectedServices;
-
     const response = await axiosInstance.patch(
       `/customers/${customer.id}`,
-      data
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${getTokenFromCookies()}`,
+          User: retrieveCurrentLoggedInUserFromCookies(),
+        },
+        withCredentials: true,
+      }
     );
 
     return response.data;

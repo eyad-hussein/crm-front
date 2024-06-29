@@ -6,7 +6,7 @@ import { CustomerStatusType } from "@/enums";
 import { convertSnakeToPascalWithSpaces } from "@/lib/parser";
 
 interface CustomerStatusProps {
-  customerId: number | undefined;
+  customerId: number;
   oldCustomerStatus: CustomerStatusType | undefined;
 }
 
@@ -19,9 +19,8 @@ export default function CustomerStatus({
   >(oldCustomerStatus);
 
   const handleOnClick = async (status: CustomerStatusType) => {
-    logger.info("patching customer status, client side");
     setCurrentCustomerStatus(status);
-    await patchCustomerStatus(customerId!, status);
+    await patchCustomerStatus(customerId, status);
   };
 
   return (

@@ -1,6 +1,8 @@
 "use server";
 
+import { retrieveCurrentLoggedInUserFromCookies } from "@/lib/cookies-handler";
 import { logger } from "@/lib/logger";
+import { getTokenFromCookies } from "@/lib/token-handler";
 import { ICustomer, ICustomerStatus } from "@/types";
 import axios from "axios";
 
@@ -44,7 +46,14 @@ const sortCustomers = async (
 
     const response = await axios.post(
       `${process.env.BACKEND_API_URL}/customers/sort`,
-      data
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${getTokenFromCookies()}`,
+          User: retrieveCurrentLoggedInUserFromCookies(),
+        },
+        withCredentials: true,
+      }
     );
 
     const sortedIds = response.data;
@@ -52,10 +61,6 @@ const sortCustomers = async (
       return customers?.find((customer) => customer.customer.id === id);
     });
 
-    logger.info({
-      message: "sorted customers",
-      customers: response.data,
-    });
     return sortedCustomers;
   } catch (e) {
     logger.error(e);

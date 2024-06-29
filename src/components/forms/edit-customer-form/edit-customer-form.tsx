@@ -10,7 +10,7 @@ import {
   getStatesByCountryId,
   patchCustomer,
 } from "@/actions";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import CancelButtonBig from "@/components/buttons/cancel-button/cancel-button-big";
 import FormLabel from "@/components/form-elements/form-label/form-label";
 import FormSelect from "@/components/form-elements/form-select/form-select";
@@ -21,7 +21,7 @@ import {
   ICustomer,
   IExtension,
   IIndustry,
-  IService,
+  IPackage,
   IState,
   IUser,
 } from "@/types";
@@ -33,7 +33,7 @@ interface EditCustomerFormProps {
     countries: ICountry[] | null;
     industries: IIndustry[] | null;
     extensions: IExtension[] | null;
-    services: IService[] | null;
+    packages: IPackage[] | null;
     initialCities: ICity[] | null;
     initialStates: IState[] | null;
   };
@@ -46,32 +46,19 @@ export default function EditCustomerForm({
     countries,
     industries,
     extensions,
-    services,
+    packages,
     initialCities,
     initialStates,
   },
 }: EditCustomerFormProps) {
   const [cities, setCities] = useState<ICity[] | null>(initialCities);
   const [states, setStates] = useState<IState[] | null>(initialStates);
-
-  const [selectedServices, setSelectedServices] = useState<number[]>(
-    customer.services.map((service) => service.id)
-  );
-
-  const handleOnServiceChange = (id: number) => {
-    setSelectedServices((selectedServices) => {
-      if (selectedServices.includes(id)) {
-        return selectedServices.filter((serviceId) => serviceId !== id);
-      } else {
-        return [...selectedServices, id];
-      }
-    });
-  };
+  const [isEdited, setIsEdited] = useState<boolean>(false);
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
 
   const handleCountryChange = async (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    logger.info("Handling country change");
     const countryId = e.target.value;
     const states = await getStatesByCountryId(countryId);
     setStates(states);
@@ -79,18 +66,29 @@ export default function EditCustomerForm({
   };
 
   const handleStateChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
-    logger.info("Handling state change");
     const stateId = e.target.value;
     const cities = await getCitiesByStateId(stateId);
     setCities(cities);
   };
 
+  const handleOnSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const res = await patchCustomer(customer, formData);
+
+    setIsSubmit((prev) => true);
+    if (res) {
+      setIsEdited((prev) => true);
+    } else {
+      setIsEdited((prev) => false);
+    }
+  };
+
   return (
     <div>
       <h1 className='mb-6 text-3xl'>Edit Customer</h1>
-      <form
-        className='w-full flex justify-between'
-        action={patchCustomer.bind(null, selectedServices, customer)}>
+      <form className='w-full flex justify-between' onSubmit={handleOnSubmit}>
         <div className='w-1/2 mr-12'>
           <div className='flex flex-wrap -mx-3 mb-3'>
             <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
@@ -194,23 +192,22 @@ export default function EditCustomerForm({
           </div>
 
           <div className='w-full mb-6'>
-            <FormLabel className='mb-2' htmlFor='services' content='Services' />
-            {services?.map((service) => (
-              <label
-                className='block'
-                htmlFor={service.id.toString()}
-                key={service.id}>
-                <input
-                  checked={selectedServices.includes(service.id)}
-                  type='checkbox'
-                  name={service.id.toString()}
-                  id={service.id.toString()}
-                  defaultValue={service.id}
-                  onChange={() => handleOnServiceChange(service.id)}
-                />
-                {service.service_name}
-              </label>
-            ))}
+            <FormLabel
+              className='mb-2'
+              htmlFor='pacakge_id'
+              content='Packages'
+            />
+            <FormSelect
+              name='package_id'
+              defaultValue={customer.package_id?.toString()}>
+              {packages?.map((p) => {
+                return (
+                  <option key={p.id} value={p.id}>
+                    {p.package_name}
+                  </option>
+                );
+              })}
+            </FormSelect>
           </div>
         </div>
 
@@ -434,6 +431,13 @@ export default function EditCustomerForm({
           </div>
         </div>
       </form>
+
+      {isSubmit &&
+        (isEdited ? (
+          <div className='text-green-400'>Customer edited successfully</div>
+        ) : (
+          <div className='text-red-400'>Customer was not edited created</div>
+        ))}
     </div>
   );
 }

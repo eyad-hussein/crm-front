@@ -1,20 +1,28 @@
 "use server";
+import axiosInstance from "@/lib/axios";
+import { retrieveCurrentLoggedInUserFromCookies } from "@/lib/cookies-handler";
 import { logger } from "@/lib/logger";
+import { getTokenFromCookies } from "@/lib/token-handler";
 import { ICustomerStatus } from "@/types";
-import axios from "axios";
+
 const searchForCustomers = async (
   status: string,
   query?: string,
   searchFilters?: string
 ) => {
-  logger.info({ query }, "searching for customer query:");
-  logger.info({ searchFilters, status }, "searching for customer params");
-
   try {
-    logger.info("searching for customer");
+    if (!query) return null;
 
-    const response = await axios.get<ICustomerStatus[]>(
-      `${process.env.BACKEND_API_URL}/customers/search?query=${query}&status=${status}&searchFilters=${searchFilters}`
+    logger.info("Searching for customers");
+    const response = await axiosInstance.get<ICustomerStatus[]>(
+      `/customers/search?query=${query}&status=${status}&searchFilters=${searchFilters}`,
+      {
+        headers: {
+          Authorization: `Bearer ${getTokenFromCookies()}`,
+          User: retrieveCurrentLoggedInUserFromCookies(),
+        },
+        withCredentials: true,
+      }
     );
 
     return response.data;

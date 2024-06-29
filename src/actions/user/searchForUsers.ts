@@ -2,17 +2,25 @@
 import { logger } from "@/lib/logger";
 import { IUser } from "@/types";
 import axiosInstance from "@/lib/axios";
+import { getTokenFromCookies } from "@/lib/token-handler";
+import { retrieveCurrentLoggedInUserFromCookies } from "@/lib/cookies-handler";
 const searchForUsers = async (query?: string) => {
-  logger.info({ message: "searching for user query:", query });
-
   try {
-    logger.info("searching for users");
+    if (!query) return null;
+
+    logger.info({ message: "searching for user query:", query });
 
     const response = await axiosInstance.get<IUser[]>(
-      `${process.env.BACKEND_API_URL}/users/search?query=${query}`
+      `${process.env.BACKEND_API_URL}/users/search?query=${query}`,
+      {
+        headers: {
+          Authorization: `Bearer ${getTokenFromCookies()}`,
+          User: retrieveCurrentLoggedInUserFromCookies(),
+        },
+        withCredentials: true,
+      }
     );
 
-    logger.info({ response: response.data });
     return response.data;
   } catch (error) {
     logger.error(error);

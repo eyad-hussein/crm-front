@@ -7,7 +7,7 @@ import {
   getCitiesByStateId,
   getStatesByCountryId,
 } from "@/actions";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import CancelButtonBig from "@/components/buttons/cancel-button/cancel-button-big";
 import FormLabel from "@/components/form-elements/form-label/form-label";
 import FormSelect from "@/components/form-elements/form-select/form-select";
@@ -17,7 +17,7 @@ import {
   ICountry,
   IExtension,
   IIndustry,
-  IService,
+  IPackage,
   IState,
   IUser,
 } from "@/types";
@@ -28,32 +28,21 @@ interface CreateCustomerFormProps {
     countries: ICountry[] | null;
     industries: IIndustry[] | null;
     extensions: IExtension[] | null;
-    services: IService[] | null;
+    packages: IPackage[] | null;
   };
 }
 
 export default function CreateCustomerForm({
-  data: { users, countries, industries, extensions, services },
+  data: { users, countries, industries, extensions, packages },
 }: CreateCustomerFormProps) {
   const [cities, setCities] = useState<ICity[] | null>([]);
   const [states, setStates] = useState<IState[] | null>([]);
-
-  const [selectedServices, setSelectedServices] = useState<number[]>([]);
-
-  const handleOnServiceClick = (id: number) => {
-    setSelectedServices((selectedServices) => {
-      if (selectedServices.includes(id)) {
-        return selectedServices.filter((serviceId) => serviceId !== id);
-      } else {
-        return [...selectedServices, id];
-      }
-    });
-  };
+  const [isCreated, setIsCreated] = useState<boolean>(false);
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
 
   const handleCountryChange = async (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    logger.info("Handling country change");
     const countryId = e.target.value;
     const states = await getStatesByCountryId(countryId);
     setStates(states);
@@ -61,18 +50,27 @@ export default function CreateCustomerForm({
   };
 
   const handleStateChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
-    logger.info("Handling state change");
     const stateId = e.target.value;
     const cities = await getCitiesByStateId(stateId);
     setCities(cities);
   };
+  const handleOnSubmit = async (e: FormEvent) => {
+    e.preventDefault();
 
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const customer = await createCustomer(formData);
+
+    setIsSubmit((prev) => true);
+    if (customer) {
+      setIsCreated((prev) => true);
+    } else {
+      setIsCreated((prev) => false);
+    }
+  };
   return (
     <div>
       <h1 className='mb-6 text-3xl'>Add a New Customer</h1>
-      <form
-        className='w-full flex justify-between'
-        action={createCustomer.bind(null, selectedServices)}>
+      <form className='w-full flex justify-between' onSubmit={handleOnSubmit}>
         <div className='w-1/2 mr-12'>
           <div className='flex flex-wrap -mx-3 mb-3'>
             <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
@@ -163,22 +161,18 @@ export default function CreateCustomerForm({
           </div>
 
           <div className='w-full mb-6'>
-            <FormLabel className='mb-2' htmlFor='services' content='Services' />
-            {services?.map((service) => (
-              <label
-                className='block'
-                htmlFor={service.id.toString()}
-                key={service.id}>
-                <input
-                  type='checkbox'
-                  name={service.id.toString()}
-                  id={service.id.toString()}
-                  value={service.id}
-                  onClick={() => handleOnServiceClick(service.id)}
-                />
-                {service.service_name}
-              </label>
-            ))}
+            <FormLabel
+              className='mb-2'
+              htmlFor='package_id'
+              content='Packages'
+            />
+            <FormSelect name='package_id'>
+              {packages?.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.package_name}
+                </option>
+              ))}
+            </FormSelect>
           </div>
         </div>
 
@@ -345,6 +339,12 @@ export default function CreateCustomerForm({
           </div>
         </div>
       </form>
+      {isSubmit &&
+        (isCreated ? (
+          <div className='text-green-400'>Customer created successfully</div>
+        ) : (
+          <div className='text-red-400'>Customer was not created</div>
+        ))}
     </div>
   );
 }
